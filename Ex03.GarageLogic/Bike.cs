@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic
             BB,
         }
 
+
         private eLicenseType m_LicenseType;
         private int m_EngineVolume;
     }
