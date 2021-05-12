@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class VehicleFactory
+    public class VehicleFactory
     {
         private static readonly List<string> r_VehiclesList = new List<string>()
         {
-            "GasBike",
-            "ElectricBike",
-            "GasCar",
-            "ElectricCar",
-            "GasTruck"
+            "Gas Bike",
+            "Electric Bike",
+            "Gas Car",
+            "Electric Car",
+            "Gas Truck"
         };
 
         public static List<string> GetVehiclesList()
@@ -23,26 +23,36 @@ namespace Ex03.GarageLogic
             return r_VehiclesList;
         }
 
-        public static List<string> GetVehicleSpecs(string i_VehicleToEnter)
+        public static List<string> GetVehicleSpecs(string i_VehicleTypeToInsert)
         {
             List<string> vehicleSpecs = new List<string>();
-            switch (i_VehicleToEnter)
+            switch (i_VehicleTypeToInsert)
             {
-                case "GasBike":
-                    vehicleSpecs = getGasBikeSpecs();
-                    break;
-                case "ElectricBike":
-                    vehicleSpecs = getElectricBikeSpecs();
-                    break;
-                case "GasCar":
-                    vehicleSpecs = getGasCarSpecs();
-                    break;
-                case "ElectricCar":
-                    vehicleSpecs = getElectricCarSpecs();
-                    break;
-                case "GasTruck":
-                    vehicleSpecs = getGasTruckSpecs();
-                    break;
+                case "Gas Bike":
+                    {
+                        vehicleSpecs = getGasBikeSpecs();
+                        break;
+                    }
+                case "Electric Bike":
+                    {
+                        vehicleSpecs = getElectricBikeSpecs();
+                        break;
+                    }
+                case "Gas Car":
+                    {
+                        vehicleSpecs = getGasCarSpecs();
+                        break;
+                    }
+                case "Electric Car":
+                    {
+                        vehicleSpecs = getElectricCarSpecs();
+                        break;
+                    }
+                case "Gas Truck":
+                    {
+                        vehicleSpecs = getGasTruckSpecs();
+                        break;
+                    }
                 default:
                     throw new ArgumentException("Vehicle type is not supported! ");
             }
@@ -50,6 +60,18 @@ namespace Ex03.GarageLogic
             return vehicleSpecs;
         }
 
+        private static List<string> getGasBikeSpecs() //TODO MAKE SURE SPECS MATCH WHAT IS NEEDED  
+        {
+            List<string> specsList = new List<string>();
+            specsList.Add("Vehicle Model");
+            specsList.Add("Wheels Manufacturer");
+            specsList.Add("Wheels Count");
+            specsList.Add("Wheels Current Tire Pressure");
+            specsList.Add("Wheels Max Tire Pressure");
+            specsList.Add("Gas Type");
+            specsList.Add("Gas Capacity");
+            return specsList;
+        }
         private static List<string> getGasTruckSpecs() //TODO MAKE SURE SPECS MATCH WHAT IS NEEDED  
         {
             List<string> specsList = new List<string>();
@@ -89,35 +111,27 @@ namespace Ex03.GarageLogic
             specsList.Add("Gas Capacity");
             return specsList;
         }
-        private static List<string> getGasBikeSpecs() //TODO MAKE SURE SPECS MATCH WHAT IS NEEDED 
-        {
-            List<string> specsList = new List<string>();
-            specsList.Add("Wheel Count");
-            specsList.Add("Tire Pressure");
-            specsList.Add("Gas Type");
-            specsList.Add("Gas Capacity");
-            return specsList;
-        }
 
-        public static Vehicle CreateVehicle(string i_VehicleToBuild, List<string> i_VehicleSpecs)
+
+        public static Vehicle CreateVehicle(string i_VehicleToBuild, Dictionary<string, string> i_VehicleSpecs, string i_LicensePlateNumber)
         {
             Vehicle vehicleToReturn;
             switch (i_VehicleToBuild)
             {
-                case "GasBike":
-                    vehicleToReturn = createGasBike(i_VehicleSpecs);
+                case "Gas Bike":
+                    vehicleToReturn = createGasBike(i_VehicleSpecs, i_LicensePlateNumber);
                     break;
-                case "ElectricBike":
-                    vehicleToReturn = createElectricBike(i_VehicleSpecs);
+                case "Electric Bike":
+                    vehicleToReturn = createElectricBike(i_VehicleSpecs, i_LicensePlateNumber);
                     break;
-                case "GasCar":
-                    vehicleToReturn = createGasCar(i_VehicleSpecs);
+                case "Gas Car":
+                    vehicleToReturn = createGasCar(i_VehicleSpecs, i_LicensePlateNumber);
                     break;
-                case "ElectricCar":
-                    vehicleToReturn = createElectricCar(i_VehicleSpecs);
+                case "Electric Car":
+                    vehicleToReturn = createElectricCar(i_VehicleSpecs, i_LicensePlateNumber);
                     break;
-                case "GasTruck":
-                    vehicleToReturn = createGasTruck(i_VehicleSpecs);
+                case "Gas Truck":
+                    vehicleToReturn = createGasTruck(i_VehicleSpecs, i_LicensePlateNumber);
                     break;
                 default:
                     throw new ArgumentException("Vehicle type is not supported! ");
@@ -126,35 +140,48 @@ namespace Ex03.GarageLogic
             return vehicleToReturn;
 
         }
+        private static Vehicle createGasBike(Dictionary<string, string> i_VehicleSpecs, string i_LicensePlateNumber)
+        {
+            //List<string> specsList = new List<string>();
+            //specsList.Add("Vehicle Model");
+            //specsList.Add("Wheels Manufacturer");
+            //specsList.Add("Wheels Count");
+            //specsList.Add("Wheels Current Tire Pressure");
+            //specsList.Add("Wheels Max Tire Pressure");
+            //specsList.Add("Gas Type");
+            //specsList.Add("Gas Capacity");
+            //return specsList;
+            Bike resultBike = new Bike();
+                
 
-        private static Vehicle createElectricCar(List<string> i_VehicleSpecs)
+            //need to read the data and make the bike 
+
+            return resultBike;
+        }
+
+        private static Vehicle createElectricCar(Dictionary<string, string> i_VehicleSpecs, string i_LicensePlateNumber)
         {
             //TODO PARSE LIST TO VARIABLES AND THROW EXCEPTIONS OTHERWISE
             throw new NotImplementedException();
         }
 
-        private static Vehicle createGasTruck(List<string> i_VehicleSpecs)
+        private static Vehicle createGasTruck(Dictionary<string, string> i_VehicleSpecs, string i_LicensePlateNumber)
         {
             //TODO PARSE LIST TO VARIABLES AND THROW EXCEPTIONS OTHERWISE
             throw new NotImplementedException();
         }
 
-        private static Vehicle createGasCar(List<string> i_VehicleSpecs)
+        private static Vehicle createGasCar(Dictionary<string, string> i_VehicleSpecs, string i_LicensePlateNumber)
         {
             //TODO PARSE LIST TO VARIABLES AND THROW EXCEPTIONS OTHERWISE
             throw new NotImplementedException();
         }
 
-        private static Vehicle createElectricBike(List<string> i_VehicleSpecs)
+        private static Vehicle createElectricBike(Dictionary<string, string> i_VehicleSpecs, string i_LicensePlateNumber)
         {
             //TODO PARSE LIST TO VARIABLES AND THROW EXCEPTIONS OTHERWISE
             throw new NotImplementedException();
         }
 
-        private static Vehicle createGasBike(List<string> i_VehicleSpecs)
-        {
-            //TODO PARSE LIST TO VARIABLES AND THROW EXCEPTIONS OTHERWISE
-            throw new NotImplementedException();
-        }
     }
 }

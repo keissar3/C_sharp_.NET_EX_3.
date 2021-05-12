@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
         {
             if (m_BatteryCharge + i_HoursToCharge > m_BatteryCapacity)
             {
-                throw new ValueOutOfRangeException("Too much power, can't charge so much!")
+                throw new ValueOutOfRangeException("Too much power, can't charge so much!");
             }
             m_BatteryCharge += i_HoursToCharge;
         }

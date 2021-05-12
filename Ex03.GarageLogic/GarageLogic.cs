@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class GarageLogic
+    public class GarageLogic
     {
         private List<Vehicle> m_Records;
 

@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
         {
             if (m_GasType != i_GasType)
             {
-                throw new ArgumentException("Wrong Gas Type"))
+                throw new ArgumentException("Wrong Gas Type");
             }
 
             if (m_GasGauge + i_GasLiters > m_GasCapacity)
