@@ -10,6 +10,14 @@ namespace Ex03.GarageLogic
     {
         private float m_BatteryCharge;
         private float m_BatteryCapacity;
-        privateChargeBattery(float i_HoursToCharge);
+
+        public void ChargeBattery(float i_HoursToCharge)
+        {
+            if (m_BatteryCharge + i_HoursToCharge > m_BatteryCapacity)
+            {
+                throw new ValueOutOfRangeException("Too much power, can't charge so much!")
+            }
+            m_BatteryCharge += i_HoursToCharge;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
 
     class VehicleRecord
     {
-         public enum eVehicleStatus
+        public enum eVehicleStatus
         {
             InRepair,
             Repaired,

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Truck : Vehicle
+    class ValueOutOfRangeException : Exception
     {
-        private bool m_IsTransportingHazardousMaterials;
-        private float m_PayloadCapacity;
-
-
+        public ValueOutOfRangeException(string i_Message)
+            : base(i_Message)
+        {
+        }
 
     }
 }
