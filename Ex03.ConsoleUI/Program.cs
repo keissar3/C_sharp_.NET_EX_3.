@@ -10,8 +10,6 @@ namespace Ex03.ConsoleUI
     using GarageLogic;
     class Program
     {
-        private GarageLogic myGarage = new GarageLogic();
-
         // ------------------------------------------------------ enum for main menu
         private enum eMainGarageMenu
         {
@@ -28,18 +26,24 @@ namespace Ex03.ConsoleUI
 
         public static void Main(string[] args)
         {
-            int userSelection = showMainGarageMenuAndGetUserInput();
-            showSubMenuUsingUserSelection(userSelection);
+            GarageLogic MyGarage = new GarageLogic();
+            int userSelection = 0;
+            while (userSelection != 8)
+            {
+                userSelection = showMainGarageMenuAndGetUserInput();
+                showSubMenuUsingUserSelection(userSelection, MyGarage);
+                Console.Clear();
+            }
         }
 
         // ----------------------------------------------------- choose sub menus
-        private static void showSubMenuUsingUserSelection(int i_UserSelection)
+        private static void showSubMenuUsingUserSelection(int i_UserSelection, GarageLogic i_MyGarage)
         {
             switch (i_UserSelection)
             {
                 case (int)eMainGarageMenu.InsertVehicleToGarage:
                     {
-                        InsertVehicleToGarageMenu.ShowInsertVehicleToGarageMenu();
+                        InsertVehicleToGarageMenu.ShowInsertVehicleToGarageMenu(i_MyGarage);
                         break;
                     }
                 case (int)eMainGarageMenu.ShowVehicles:
@@ -131,12 +135,13 @@ namespace Ex03.ConsoleUI
 4. Inflate vehicle tires
 5. Fuel a gasoline vehicle
 6. Charge an electric vehicle
-7. Show vehicle details");
+7. Show vehicle details
+8. Exit");
                 string stringUserSelection = Console.ReadLine();
                 validSelection = int.TryParse(stringUserSelection, out userSelection);
                 if (validSelection == true)
                 {
-                    if (userSelection < 1 || userSelection > 7)
+                    if (userSelection < 1 || userSelection > 8)
                     {
                         validSelection = false;
                     }

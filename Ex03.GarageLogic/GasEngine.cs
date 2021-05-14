@@ -10,15 +10,21 @@ namespace Ex03.GarageLogic
     {
         public enum eGasType
         {
-            Octan96,
+            Octan98 = 1,
             Octan95,
-            Octan98,
-        }
+            Soler
+        };
 
         private eGasType m_GasType;
         private float m_GasGauge;
         private float m_GasCapacity;
 
+        public GasEngine(eGasType i_GasType, float i_GasGauge, float i_GasCapacity)
+        {
+            m_GasType = i_GasType;
+            m_GasGauge = i_GasGauge;
+            m_GasCapacity = i_GasCapacity;
+        }
         public void FillUpGas(float i_GasLiters, eGasType i_GasType)
         {
             if (m_GasType != i_GasType)

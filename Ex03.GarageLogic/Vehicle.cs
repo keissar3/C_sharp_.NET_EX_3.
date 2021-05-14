@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class Vehicle
+    public abstract class Vehicle
     {
         string m_ModelName;
         string m_LicensePlateNumber;
-        float m_Energy;
+      //  float m_Energy; //TODO need to decide whether to keep it or not 
         Wheel[] m_Wheels;
         Engine m_Engine;
 
-        public string LicensePlateNumber
+        
+        public  string  LicensePlateNumber
         {
             get
             {
-                return LicensePlateNumber;
+                return m_LicensePlateNumber;
             }
             set
             {
@@ -37,15 +38,39 @@ namespace Ex03.GarageLogic
                 m_ModelName = value;
             }
         }
-        public float Energy
+        //public float Energy
+        //{
+        //    get
+        //    {
+        //        return m_Energy;
+        //    }
+        //    set
+        //    {
+        //        m_Energy = value;
+        //    }
+        //}
+
+        public Wheel[] Wheels
         {
             get
             {
-                return m_Energy;
+                return m_Wheels;
             }
             set
             {
-                m_Energy = value;
+                m_Wheels = value;
+            }
+        }
+
+        public Engine Engine
+        {
+            get
+            {
+                return m_Engine;
+            }
+            set
+            {
+                m_Engine = value;
             }
         }
     }
