@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
@@ -24,24 +25,48 @@ namespace Ex03.ConsoleUI
             { 
                 Console.Clear();
                 Console.WriteLine("The vehicle is already exists");
+                i_MyGarage.SetStatusInVehicle(licensePlateNumber,Record.eVehicleStatus.inRepair);
             }
             else
-            {
-                insertNewVehicleToGarage(licensePlateNumber, i_MyGarage);
+            { 
+                Console.WriteLine("Please insert your name:");
+                string ownerName = Console.ReadLine();
+                Console.WriteLine("Please insert your phone number:");
+                string ownerPhoneNumber = Console.ReadLine();
+                Console.Clear();
+                insertNewVehicleToGarage(licensePlateNumber, i_MyGarage,ownerName,ownerPhoneNumber);
                 Console.WriteLine("The vehicle was successfully added to the garage.");
             }
             Thread.Sleep(3000);
         }
 
-        private static void insertNewVehicleToGarage(string i_LicensePlate, GarageLogic i_MyGarage)
+        private static void insertNewVehicleToGarage(string i_LicensePlate, GarageLogic i_MyGarage,string i_OwnerName,string i_OwnerPhoneNumber)
+        {
+            
+            string vehicleTypeToInsert = getFromUserTypeOfVehicle();
+            try
+            {
+                getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate, vehicleTypeToInsert, i_MyGarage,
+                    i_OwnerName, i_OwnerPhoneNumber);
+            }
+            catch (ArgumentException exception)
+            {
+                Console.Clear();
+                Console.WriteLine(exception.Message);
+                insertNewVehicleToGarage(i_LicensePlate, i_MyGarage,  i_OwnerName, i_OwnerPhoneNumber);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                throw;
+            }
+            Console.Clear(); ;
+           
+        }
+
+        private static string getFromUserTypeOfVehicle()
         {
             List<string> vehiclesList = VehicleFactory.GetVehiclesList();
-            Console.Clear();
-            Console.WriteLine("Please insert your name:");
-            string ownerName = Console.ReadLine();
-            Console.WriteLine("Please insert your phone number:");
-            string ownerPhoneNumber = Console.ReadLine();
-            Console.Clear();
             Console.WriteLine("These are the vehicles that we support:");
             foreach (string vehicle in vehiclesList)
             {
@@ -50,13 +75,10 @@ namespace Ex03.ConsoleUI
 
             Console.WriteLine("Which vehicle would you like to insert ?");
             string vehicleTypeToInsert = Console.ReadLine();
-            Console.Clear();
-            getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate,vehicleTypeToInsert,i_MyGarage,ownerName,ownerPhoneNumber);
             
-            Console.Clear(); ;
-           
-        }
 
+            return vehicleTypeToInsert;
+        }
         private static void getInformationAboutTheVehicleFromUserAndCreateIt(string i_LicensePlate,string i_vehicleType, GarageLogic i_MyGarage,string i_OwnerName,string i_OwnerPhoneNumber)
         {
             List<string> vehicleSpecsNeeded = VehicleFactory.GetVehicleSpecs(i_vehicleType);
@@ -98,8 +120,6 @@ namespace Ex03.ConsoleUI
                 getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate, i_vehicleType, i_MyGarage, i_OwnerName,
                     i_OwnerPhoneNumber);
             }
-
-
 
         }
     }

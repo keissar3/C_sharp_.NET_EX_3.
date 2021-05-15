@@ -37,6 +37,7 @@ namespace Ex03.GarageLogic
             LicensePlateNumber = i_LicensePlateNumber;
             m_Color = i_Color;
             m_DoorCount = i_DoorCount;
+            WheelCount = 4;
         }
 
     }

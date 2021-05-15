@@ -12,7 +12,8 @@ namespace Ex03.GarageLogic
         string m_LicensePlateNumber;
       //  float m_Energy; //TODO need to decide whether to keep it or not 
         Wheel[] m_Wheels;
-        Engine m_Engine;
+        Engine m_Engine; 
+        int m_WheelsCount;
 
         
         public  string  LicensePlateNumber
@@ -36,6 +37,18 @@ namespace Ex03.GarageLogic
             set
             {
                 m_ModelName = value;
+            }
+        }
+
+        public int WheelCount
+        {
+            get
+            {
+                return m_WheelsCount;
+            }
+            set
+            {
+                m_WheelsCount = value;
             }
         }
         //public float Energy

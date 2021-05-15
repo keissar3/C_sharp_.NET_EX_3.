@@ -29,6 +29,7 @@ namespace Ex03.GarageLogic
             Engine = i_Engine;
             ModelName = i_ModelName;
             LicensePlateNumber = i_LicensePlateNumber;
+            WheelCount = 2;
 
         }
 

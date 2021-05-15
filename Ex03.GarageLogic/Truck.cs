@@ -21,6 +21,7 @@ namespace Ex03.GarageLogic
             LicensePlateNumber = i_LicensePlateNumber;
             m_IsTransportingHazardousMaterials = i_IsTransportingHazardousMaterials;
             m_PayloadCapacity = i_PayloadCapacity;
+            WheelCount = 16;
         }
 
 
