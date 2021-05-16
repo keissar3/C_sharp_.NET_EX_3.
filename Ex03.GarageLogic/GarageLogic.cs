@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     public class GarageLogic
     {
-        private List<Record> m_Records=new List<Record>();
+        private List<Record> m_Records = new List<Record>();
 
         public void AddVehicleToGarageRecords(Record i_Record)
         {
@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
 
         public bool CheckIfVehicleIsExists(string i_LicensePlateNumber)
         {
-            bool isFound=false;
+            bool isFound = false;
             foreach (var record in m_Records)
             {
                 if (record.Vehicle.LicensePlateNumber == i_LicensePlateNumber)
@@ -25,8 +25,21 @@ namespace Ex03.GarageLogic
                     isFound = true;
                 }
             }
-            
+
             return isFound;
+        }
+        public Vehicle GetVehicleByLicensePlate(string i_LicensePlateNumber)
+        {
+            Vehicle carToReturn = null;
+            foreach (var record in m_Records)
+            {
+                if (record.Vehicle.LicensePlateNumber == i_LicensePlateNumber)
+                {
+                    carToReturn = record.Vehicle;
+                }
+            }
+
+            return carToReturn;
         }
 
         public List<Record> Records
@@ -37,7 +50,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void SetStatusInVehicle(string i_LicensePlateNumber,Record.eVehicleStatus i_Status)
+        public void SetStatusInVehicle(string i_LicensePlateNumber, Record.eVehicleStatus i_Status)
         {
             foreach (var record in m_Records)
             {
@@ -47,5 +60,7 @@ namespace Ex03.GarageLogic
                 }
             }
         }
+
+
     }
 }

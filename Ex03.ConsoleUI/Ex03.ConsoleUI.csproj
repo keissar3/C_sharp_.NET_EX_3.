@@ -44,7 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChangeVehicleStatusInGarageMenu.cs" />
+    <Compile Include="ChargeElectricCarMenu.cs" />
+    <Compile Include="FuelGasCarMenu.cs" />
     <Compile Include="GetListOfVehiclePlateNumberMenu.cs" />
+    <Compile Include="InflateVehicleTiresMenu.cs" />
     <Compile Include="InsertVehicleToGarageMenu.cs" />
     <Compile Include="OpenGarageAndShowMainMenu.cs" />
     <Compile Include="Program.cs" />

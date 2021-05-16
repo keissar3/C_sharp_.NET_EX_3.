@@ -1,23 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class GasEngine : Engine
+    public class GasEngine : Engine
     {
-        public enum eGasType
-        {
-            Octan98 = 1,
-            Octan95,
-            Soler
-        };
+   
 
         private eGasType m_GasType;
         private float m_GasGauge;
         private float m_GasCapacity;
+
+        public eGasType GasType
+        {
+            get
+            {
+                return m_GasType;
+            }
+            set
+            {
+                m_GasType = value; 
+            }
+        }
+        public float GasGague
+        {
+            get
+            {
+                return m_GasGauge;
+            }
+            set
+            {
+                m_GasGauge = value;
+            }
+        }
+        public float GasCapacity
+        {
+            get
+            {
+                return m_GasCapacity;
+            }
+            set
+            {
+                m_GasCapacity = value;
+            }
+        }
 
         public GasEngine(eGasType i_GasType, float i_GasGauge, float i_GasCapacity)
         {

@@ -19,6 +19,30 @@ namespace Ex03.GarageLogic
             m_MaxTirePressure = i_MaxTirePressure;
         }
 
+        public float CurrentTirePressure
+        {
+            get
+            {
+                return m_TirePressure;
+            }
+            set
+            {
+                m_TirePressure = value;
+            }
+        }
+
+        public float MaxTirePressure
+        {
+            get
+            {
+                return m_MaxTirePressure;
+            }
+            set
+            {
+                m_MaxTirePressure = value;
+            }
+        }
+
 
         public void InflateTire(float i_AirToAdd)
         {

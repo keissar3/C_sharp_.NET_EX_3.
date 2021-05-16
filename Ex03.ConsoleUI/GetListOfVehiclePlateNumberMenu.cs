@@ -9,12 +9,12 @@ namespace Ex03.ConsoleUI
     using GarageLogic;
     enum eGetVehiclesListMenu
     {
-        AllVehicles=1,
+        AllVehicles = 1,
         RepairedVehicles,
-        FixedVehicles, 
+        FixedVehicles,
         PaidVehicles
     }
-    class GetListOfVehiclePlateNumberMenu
+    internal class GetListOfVehiclePlateNumberMenu
     {
         public static void ShowGetListOfVehiclePlateNumberMenu(GarageLogic i_MyGarage)
         {
@@ -22,26 +22,26 @@ namespace Ex03.ConsoleUI
             int userSelection = getUserSelection();
             switch (userSelection)
             {
-                case (int) eGetVehiclesListMenu.AllVehicles:
-                {
-                    presentVehiclesPlateNumberList(i_MyGarage);
-                    break;
-                }
-                case (int) eGetVehiclesListMenu.FixedVehicles:
-                {
-                    presentFixedVehiclesPlateNumberList(i_MyGarage);
-                    break;
-                }
-                case (int) eGetVehiclesListMenu.PaidVehicles:
-                {
-                    presentPaidVehiclesPlateNumberList(i_MyGarage);
-                    break;
-                }
-                case (int) eGetVehiclesListMenu.RepairedVehicles:
-                {
-                    presentRepairedVehiclesPlateNumberList(i_MyGarage);
-                    break;
-                }
+                case (int)eGetVehiclesListMenu.AllVehicles:
+                    {
+                        presentVehiclesPlateNumberList(i_MyGarage);
+                        break;
+                    }
+                case (int)eGetVehiclesListMenu.FixedVehicles:
+                    {
+                        presentFixedVehiclesPlateNumberList(i_MyGarage);
+                        break;
+                    }
+                case (int)eGetVehiclesListMenu.PaidVehicles:
+                    {
+                        presentPaidVehiclesPlateNumberList(i_MyGarage);
+                        break;
+                    }
+                case (int)eGetVehiclesListMenu.RepairedVehicles:
+                    {
+                        presentRepairedVehiclesPlateNumberList(i_MyGarage);
+                        break;
+                    }
             }
         }
 

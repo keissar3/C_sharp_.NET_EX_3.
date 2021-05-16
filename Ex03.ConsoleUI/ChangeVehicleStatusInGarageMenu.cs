@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 namespace Ex03.ConsoleUI
 {
     using GarageLogic;
-    class ChangeVehicleStatusInGarageMenu
+    internal class ChangeVehicleStatusInGarageMenu
     {
         enum eSetStatusMenu
         {
-            inRepair=1,
+            inRepair = 1,
             isFixed,
             isPaidUp
         }
-        public static void showChangeVehiclesStatusMenu(GarageLogic i_MyGarage)
+        public static void ShowChangeVehiclesStatusMenu(GarageLogic i_MyGarage)
         {
             Console.WriteLine("Please insert the plate number of the vehicle");
-            string OwnerPlateNumber = Console.ReadLine();
-            if (i_MyGarage.CheckIfVehicleIsExists(OwnerPlateNumber) == false)
+            string ownerPlateNumber = Console.ReadLine();
+            if (i_MyGarage.CheckIfVehicleIsExists(ownerPlateNumber) == false)
             {
                 Console.WriteLine("The vehicle isn't in the garage.");
             }
             else
             {
-                getUserInputStatusAndChangeIt(i_MyGarage, OwnerPlateNumber);
+                getUserInputStatusAndChangeIt(i_MyGarage, ownerPlateNumber);
             }
         }
         private static void getUserInputStatusAndChangeIt(GarageLogic i_MyGarage, string i_OwnerPlateNumber)
@@ -66,21 +66,21 @@ namespace Ex03.ConsoleUI
         {
             switch (i_StatusToChange)
             {
-                case (int) eSetStatusMenu.inRepair:
-                {
-                    i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber,Record.eVehicleStatus.inRepair);
-                    break;
-                }
-                case (int) eSetStatusMenu.isFixed:
-                {
-                    i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber,Record.eVehicleStatus.isFixed);
-                    break;
-                }
-                case (int) eSetStatusMenu.isPaidUp:
-                {
-                    i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber,Record.eVehicleStatus.isPaidUp);
-                    break;
-                }
+                case (int)eSetStatusMenu.inRepair:
+                    {
+                        i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber, Record.eVehicleStatus.inRepair);
+                        break;
+                    }
+                case (int)eSetStatusMenu.isFixed:
+                    {
+                        i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber, Record.eVehicleStatus.isFixed);
+                        break;
+                    }
+                case (int)eSetStatusMenu.isPaidUp:
+                    {
+                        i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber, Record.eVehicleStatus.isPaidUp);
+                        break;
+                    }
             }
         }
     }

@@ -6,10 +6,42 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricEngine : Engine
+    public class ElectricEngine : Engine
     {
         private float m_BatteryCharge;
         private float m_BatteryCapacity;
+
+        public float BatteryCharge
+        {
+            get
+            {
+                return m_BatteryCharge;
+            }
+            set
+            {
+                m_BatteryCharge = value;
+            }
+        }
+
+        public float BatteryCapacity
+        {
+            get
+            {
+                return m_BatteryCapacity;
+            }
+            set
+            {
+                m_BatteryCapacity = value;
+            }
+        }
+
+
+
+
+
+
+
+
 
         public ElectricEngine(float i_BatteryCharge, float i_BatteryCapacity)
         {

@@ -10,13 +10,13 @@ namespace Ex03.GarageLogic
     {
         string m_ModelName;
         string m_LicensePlateNumber;
-      //  float m_Energy; //TODO need to decide whether to keep it or not 
+        //  float m_Energy; //TODO need to decide whether to keep it or not 
         Wheel[] m_Wheels;
-        Engine m_Engine; 
+        Engine m_Engine;
         int m_WheelsCount;
 
-        
-        public  string  LicensePlateNumber
+      
+        public string LicensePlateNumber
         {
             get
             {
@@ -28,6 +28,13 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public void InflateAllTires(float i_AirToAdd)
+        {
+            foreach (Wheel wheel in m_Wheels)
+            {
+                wheel.InflateTire(i_AirToAdd);
+            }
+        }
         public string ModelName
         {
             get

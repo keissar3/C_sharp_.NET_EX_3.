@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
+
     public class VehicleFactory
     {
         private static readonly List<string> r_VehiclesList = new List<string>()
@@ -31,30 +32,30 @@ namespace Ex03.GarageLogic
             switch (i_VehicleTypeToInsert)
             {
                 case "Gas Bike":
-                {
-                    vehicleSpecs = getGasBikeSpecs();
-                    break;
-                }
+                    {
+                        vehicleSpecs = getGasBikeSpecs();
+                        break;
+                    }
                 case "Electric Bike":
-                {
-                    vehicleSpecs = getElectricBikeSpecs();
-                    break;
-                }
+                    {
+                        vehicleSpecs = getElectricBikeSpecs();
+                        break;
+                    }
                 case "Gas Car":
-                {
-                    vehicleSpecs = getGasCarSpecs();
-                    break;
-                }
+                    {
+                        vehicleSpecs = getGasCarSpecs();
+                        break;
+                    }
                 case "Electric Car":
-                {
-                    vehicleSpecs = getElectricCarSpecs();
-                    break;
-                }
+                    {
+                        vehicleSpecs = getElectricCarSpecs();
+                        break;
+                    }
                 case "Gas Truck":
-                {
-                    vehicleSpecs = getGasTruckSpecs();
-                    break;
-                }
+                    {
+                        vehicleSpecs = getGasTruckSpecs();
+                        break;
+                    }
                 default:
                     throw new ArgumentException("Vehicle type is not supported! ");
             }
@@ -82,7 +83,7 @@ namespace Ex03.GarageLogic
             specsList.Add("Wheels Manufacturer");
             specsList.Add("Wheels Current Tire Pressure");
             specsList.Add("Gas Gauge");
-            specsList.Add("Is Transporting Hazardous Materials?"); 
+            specsList.Add("Is Transporting Hazardous Materials?");
             specsList.Add("Payload Capacity");
             return specsList;
         }
@@ -140,10 +141,10 @@ namespace Ex03.GarageLogic
                     vehicleToReturn = createBike(i_VehicleSpecs, i_LicensePlateNumber, 1);
                     break;
                 case "Gas Car":
-                    vehicleToReturn = createCar(i_VehicleSpecs, i_LicensePlateNumber,0);
+                    vehicleToReturn = createCar(i_VehicleSpecs, i_LicensePlateNumber, 0);
                     break;
                 case "Electric Car":
-                    vehicleToReturn = createCar(i_VehicleSpecs, i_LicensePlateNumber,1);
+                    vehicleToReturn = createCar(i_VehicleSpecs, i_LicensePlateNumber, 1);
                     break;
                 case "Gas Truck":
                     vehicleToReturn = createGasTruck(i_VehicleSpecs, i_LicensePlateNumber);
@@ -156,10 +157,10 @@ namespace Ex03.GarageLogic
 
         }
 
-        private static Bike.eLicenseType getLicenceType(string i_LicenceType)
+        private static Bike.eLicenseType getLicenseType(string i_LicenseType)
         {
             Bike.eLicenseType licenceType;
-            switch (i_LicenceType)
+            switch (i_LicenseType)
             {
                 case "A":
                     licenceType = Bike.eLicenseType.A;
@@ -196,7 +197,7 @@ BB");
             return engineVolume;
         }
 
-        private static float getCurrentTirePressure(string i_CurrentTirePressure, float maxTirePressure)
+        private static float getCurrentTirePressure(string i_CurrentTirePressure, float i_MaxTirePressure)
         {
             float currentTirePressure;
             if (float.TryParse(i_CurrentTirePressure, out currentTirePressure) == false)
@@ -204,13 +205,13 @@ BB");
                 throw new FormatException("The current tire pressure must be a number.");
             }
 
-            if (currentTirePressure > maxTirePressure)
+            if (currentTirePressure > i_MaxTirePressure)
             {
                 throw new ValueOutOfRangeException(String.Format("The current tire pressure need to be less than {0}.",
-                    maxTirePressure));
+                    i_MaxTirePressure));
             }
 
-            return maxTirePressure;
+            return currentTirePressure;
         }
 
         private static float getCurrentChargeOrGauge(string i_ChargeOrGauge, float i_Capacity)
@@ -218,12 +219,12 @@ BB");
             float currenyChargeOrGauge;
             if (float.TryParse(i_ChargeOrGauge, out currenyChargeOrGauge) == false)
             {
-                throw new FormatException("Gas gauge must be a number.");
+                throw new FormatException("Energy entered must be a number.");
             }
 
             if (currenyChargeOrGauge > i_Capacity)
             {
-                throw new ValueOutOfRangeException(string.Format("The gas gauge need to be less than {0}", i_Capacity));
+                throw new ValueOutOfRangeException(string.Format("The Energy level need to be less than {0}", i_Capacity));
             }
 
             return currenyChargeOrGauge;
@@ -321,7 +322,7 @@ No");
 
             return isTransportingHazardousMaterials;
         }
-        private static Vehicle createCar(Dictionary<string, string> i_VehicleSpecs, string i_LicensePlateNumber,int i_TypeOfCar)
+        private static Vehicle createCar(Dictionary<string, string> i_VehicleSpecs, string i_LicensePlateNumber, int i_TypeOfCar)
         {
             string vehicleModel = i_VehicleSpecs["Vehicle Model"];
             string wheelsManufacturer = i_VehicleSpecs["Wheels Manufacturer"];
@@ -329,11 +330,11 @@ No");
 
             Car.eColor carColor = getCarColor(i_VehicleSpecs["Car Color"]);
             Car.eDoorCount carDoorCount = getCarDoorCount(i_VehicleSpecs["Doors Count"]);
-            
+
             Engine engine = null;
             if (i_TypeOfCar == 0)
             {
-                GasEngine.eGasType gasType = GasEngine.eGasType.Octan95;
+                eGasType gasType = eGasType.Octan95;
                 float gasGauge = getCurrentChargeOrGauge(i_VehicleSpecs["Gas Gauge"], 45);
                 engine = new GasEngine(gasType, gasGauge, 45);
             }
@@ -345,7 +346,7 @@ No");
 
             Wheel[] arrayOfWheels = getArrayOfWheels(wheelsManufacturer, wheelsCurrentTirePressure,
                 32, 4);
-           
+
 
             Car resultCar = new Car(arrayOfWheels, engine, vehicleModel, i_LicensePlateNumber, carColor, carDoorCount);
 
@@ -360,13 +361,13 @@ No");
 
             bool isTransportingHazardousMaterials = getIsTransportingHazardousMaterials(i_VehicleSpecs["Is Transporting Hazardous Materials?"]);
             float payloadCapacity = getPayLoadCapacity(i_VehicleSpecs["Payload Capacity"]);
-            GasEngine.eGasType gasType = GasEngine.eGasType.Soler;
+            eGasType gasType = eGasType.Soler;
             float gasGauge = getCurrentChargeOrGauge(i_VehicleSpecs["Gas Gauge"], 120);
             GasEngine engine = new GasEngine(gasType, gasGauge, 120);
 
             Wheel[] arrayOfWheels = getArrayOfWheels(wheelsManufacturer, wheelsCurrentTirePressure, 26,
                 16);
-            Truck resultTruck = new Truck(arrayOfWheels, engine,vehicleModel,i_LicensePlateNumber,isTransportingHazardousMaterials,payloadCapacity);
+            Truck resultTruck = new Truck(arrayOfWheels, engine, vehicleModel, i_LicensePlateNumber, isTransportingHazardousMaterials, payloadCapacity);
             return resultTruck;
         }
 
@@ -386,14 +387,14 @@ No");
             int i_TypeOfBike)
         {
             string vehicleModel = i_VehicleSpecs["Vehicle Model"];
-            Bike.eLicenseType licenseType = getLicenceType(i_VehicleSpecs["License Type"]);
+            Bike.eLicenseType licenseType = getLicenseType(i_VehicleSpecs["License Type"]);
             string wheelsManufacturer = i_VehicleSpecs["Wheels Manufacturer"];
             float wheelsCurrentTirePressure = getCurrentTirePressure(i_VehicleSpecs["Wheels Current Tire Pressure"], 30);
             int engineVolume = getEngineVolume(i_VehicleSpecs["Engine Volume"]);
             Engine engine = null;
             if (i_TypeOfBike == 0)
             {
-                GasEngine.eGasType gasType = GasEngine.eGasType.Octan98;
+                eGasType gasType = eGasType.Octan98;
                 float gasGauge = getCurrentChargeOrGauge(i_VehicleSpecs["Gas Gauge"], 6);
                 engine = new GasEngine(gasType, gasGauge, 6);
             }

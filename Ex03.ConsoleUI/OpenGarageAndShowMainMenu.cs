@@ -8,7 +8,7 @@ namespace Ex03.ConsoleUI
 {
     using GarageLogic;
 
-    class OpenGarageAndShowMainMenu
+    internal class OpenGarageAndShowMainMenu
     {
         // ------------------------------------------------------ enum for main menu
         private enum eMainGarageMenu
@@ -20,16 +20,17 @@ namespace Ex03.ConsoleUI
             FuelGasVehicle = 5,
             ChargeElectricVehicle = 6,
             ShowVehicleDetails = 7,
+            Exit = 8
         }
         // -----------------------------------------------------END  enum for main menu 
 
         // ----------------------------------------------------- choose sub menus
-        public static void PlayMainMenueAndOpenGarage()
+        public static void PlayMainMenuAndOpenGarage()
         {
 
             GarageLogic MyGarage = new GarageLogic();
             int userSelection = 0;
-            while (userSelection != 8)
+            while (userSelection != (int)eMainGarageMenu.Exit)
             {
                 userSelection = showMainGarageMenuAndGetUserInput();
                 showSubMenuUsingUserSelection(userSelection, MyGarage);
@@ -41,41 +42,41 @@ namespace Ex03.ConsoleUI
         {
             switch (i_UserSelection)
             {
-                case (int) eMainGarageMenu.InsertVehicleToGarage:
-                {
-                    InsertVehicleToGarageMenu.ShowInsertVehicleToGarageMenu(i_MyGarage);
-                    break;
-                }
-                case (int) eMainGarageMenu.ShowVehicles:
-                {
-                    GetListOfVehiclePlateNumberMenu.ShowGetListOfVehiclePlateNumberMenu(i_MyGarage);
-                    break;
-                }
-                case (int) eMainGarageMenu.ChangeVehiclesStatus:
-                {
-                    ChangeVehicleStatusInGarageMenu.showChangeVehiclesStatusMenu(i_MyGarage);
-                    break;
-                }
-                case (int) eMainGarageMenu.InflateVehicleTires:
-                {
-                    showInflateVehicleTiresMenu();
-                    break;
-                }
-                case (int) eMainGarageMenu.FuelGasVehicle:
-                {
-                    showFuelGasVehicleMenu();
-                    break;
-                }
-                case (int) eMainGarageMenu.ChargeElectricVehicle:
-                {
-                    showChargeElectricVehicleMenu();
-                    break;
-                }
-                case (int) eMainGarageMenu.ShowVehicleDetails:
-                {
-                    showShowVehicleDetailsMenu();
-                    break;
-                }
+                case (int)eMainGarageMenu.InsertVehicleToGarage:
+                    {
+                        InsertVehicleToGarageMenu.ShowInsertVehicleToGarageMenu(i_MyGarage);
+                        break;
+                    }
+                case (int)eMainGarageMenu.ShowVehicles:
+                    {
+                        GetListOfVehiclePlateNumberMenu.ShowGetListOfVehiclePlateNumberMenu(i_MyGarage);
+                        break;
+                    }
+                case (int)eMainGarageMenu.ChangeVehiclesStatus:
+                    {
+                        ChangeVehicleStatusInGarageMenu.ShowChangeVehiclesStatusMenu(i_MyGarage);
+                        break;
+                    }
+                case (int)eMainGarageMenu.InflateVehicleTires:
+                    {
+                        InflateVehicleTiresMenu.ShowInflateVehicleTiresMenu(i_MyGarage);
+                        break;
+                    }
+                case (int)eMainGarageMenu.FuelGasVehicle:
+                    {
+                        FuelGasCarMenu.ShowFuelGasVehicleMenu(i_MyGarage);
+                        break;
+                    }
+                case (int)eMainGarageMenu.ChargeElectricVehicle:
+                    {
+                        ChargeElectricCarMenu.showChargeElectricVehicleMenu(i_MyGarage);
+                        break;
+                    }
+                case (int)eMainGarageMenu.ShowVehicleDetails:
+                    {
+                        showShowVehicleDetailsMenu();
+                        break;
+                    }
             }
         }
 
@@ -150,4 +151,4 @@ namespace Ex03.ConsoleUI
     }
 
 }
-    
+
