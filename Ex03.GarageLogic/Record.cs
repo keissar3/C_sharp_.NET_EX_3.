@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+    using System.Text;
     public class Record
     {
         public enum eVehicleStatus
@@ -50,7 +46,6 @@ namespace Ex03.GarageLogic
                 m_OwnerName = value;
             }
         }
-
         public string OwnerPhoneNumber
         {
             get
@@ -75,8 +70,14 @@ namespace Ex03.GarageLogic
             }
         }
 
-
-
-
+        public override string ToString()
+        {
+            StringBuilder recordDescription = new StringBuilder();
+            recordDescription.AppendLine("--Garage Customer Report--");
+            recordDescription.AppendFormat("Owner name:         {0} {1}", m_OwnerName, Environment.NewLine);
+            recordDescription.AppendFormat("Owner phone number: {0} {1}", m_OwnerPhoneNumber, Environment.NewLine);
+            recordDescription.AppendFormat("Vehicle status:     {0} {1}", m_VehicleStatus.ToString(), Environment.NewLine);
+            return recordDescription + m_Vehicle.ToString();
+        }
     }
 }

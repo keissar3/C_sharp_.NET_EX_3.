@@ -1,12 +1,11 @@
-﻿using System;
-using System.Threading;
-
-namespace Ex03.ConsoleUI
+﻿namespace Ex03.ConsoleUI
 {
+    using System;
+    using System.Threading;
     using GarageLogic;
     internal class ChargeElectricCarMenu
     {
-        internal static void showChargeElectricVehicleMenu(GarageLogic i_MyGarage)
+        internal static void ShowChargeElectricVehicleMenu(GarageLogic i_MyGarage)
         {
             Console.Clear();
             Console.WriteLine("Please enter vehicle license plate");
@@ -38,9 +37,7 @@ namespace Ex03.ConsoleUI
             }
             Thread.Sleep(2000);
         }
-
-
-
+        
         private static float getValidMinutesToCharge(ElectricEngine i_UserEngine)
         {
             Console.Clear();
@@ -69,10 +66,7 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine("Please try again! ");
                 }
             }
-
             return userSelection / 60;
         }
-
-
     }
 }

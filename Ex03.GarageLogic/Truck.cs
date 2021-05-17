@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+    using System.Text;
     class Truck : Vehicle
     {
         private bool m_IsTransportingHazardousMaterials;
@@ -24,7 +20,16 @@ namespace Ex03.GarageLogic
             WheelCount = 16;
         }
 
+        public override string ToString()
+        {
+            string vehicleDescription = base.ToString();
+            StringBuilder truckDescription = new StringBuilder();
+            string hazardousHazardousMaterials = m_IsTransportingHazardousMaterials == true ? "yes" : "no";
+            truckDescription.AppendFormat("Transport hazardous materials:{0} {1}", hazardousHazardousMaterials, Environment.NewLine);
+            truckDescription.AppendFormat("Engine volume:                 {0} {1}", m_PayloadCapacity, Environment.NewLine);
 
-
+            vehicleDescription += truckDescription.ToString();
+            return vehicleDescription;
+        }
     }
 }

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Threading;
-using Ex03.GarageLogic;
-
-namespace Ex03.ConsoleUI
+﻿namespace Ex03.ConsoleUI
 {
+    using System;
+    using System.Threading;
     using GarageLogic;
 
     internal class FuelGasCarMenu
     {
 
-        public static void ShowFuelGasVehicleMenu(GarageLogic i_MyGarage)
+        internal static void ShowFuelGasVehicleMenu(GarageLogic i_MyGarage)
         {
             Console.Clear();
             Console.WriteLine("Please enter vehicle license plate");
@@ -38,9 +36,6 @@ namespace Ex03.ConsoleUI
                 Console.Clear();
                 Console.WriteLine("This vehicle is not found in our garage ");
             }
-
-
-
         }
 
         private static void printGasTypeSelectionOptions()

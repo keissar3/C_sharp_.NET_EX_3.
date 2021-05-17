@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+    using System.Text;
     public class GasEngine : Engine
     {
-   
-
         private eGasType m_GasType;
         private float m_GasGauge;
         private float m_GasCapacity;
@@ -23,7 +16,7 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                m_GasType = value; 
+                m_GasType = value;
             }
         }
         public float GasGague
@@ -66,8 +59,16 @@ namespace Ex03.GarageLogic
             {
                 throw new ValueOutOfRangeException("Too much gas, can't fuel so much!");
             }
-
             m_GasGauge += i_GasLiters;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder engineDescription = new StringBuilder();
+            engineDescription.AppendFormat("Gas type:     {0} {1}", m_GasType, Environment.NewLine);
+            engineDescription.AppendFormat("Gas gauge:    {0} {1}", m_GasGauge, Environment.NewLine);
+            engineDescription.AppendFormat("Gas capacity: {0} {1}", m_GasCapacity, Environment.NewLine);
+            return engineDescription.ToString();
         }
     }
 }

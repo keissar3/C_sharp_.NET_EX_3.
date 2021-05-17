@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.ConsoleUI
+﻿namespace Ex03.ConsoleUI
 {
+    using System;
     using GarageLogic;
 
     internal class OpenGarageAndShowMainMenu
     {
-        // ------------------------------------------------------ enum for main menu
         private enum eMainGarageMenu
         {
             InsertVehicleToGarage = 1,
@@ -22,18 +16,15 @@ namespace Ex03.ConsoleUI
             ShowVehicleDetails = 7,
             Exit = 8
         }
-        // -----------------------------------------------------END  enum for main menu 
 
-        // ----------------------------------------------------- choose sub menus
         public static void PlayMainMenuAndOpenGarage()
         {
-
-            GarageLogic MyGarage = new GarageLogic();
+            GarageLogic myGarage = new GarageLogic();
             int userSelection = 0;
             while (userSelection != (int)eMainGarageMenu.Exit)
             {
                 userSelection = showMainGarageMenuAndGetUserInput();
-                showSubMenuUsingUserSelection(userSelection, MyGarage);
+                showSubMenuUsingUserSelection(userSelection, myGarage);
                 Console.Clear();
             }
         }
@@ -69,49 +60,16 @@ namespace Ex03.ConsoleUI
                     }
                 case (int)eMainGarageMenu.ChargeElectricVehicle:
                     {
-                        ChargeElectricCarMenu.showChargeElectricVehicleMenu(i_MyGarage);
+                        ChargeElectricCarMenu.ShowChargeElectricVehicleMenu(i_MyGarage);
                         break;
                     }
                 case (int)eMainGarageMenu.ShowVehicleDetails:
                     {
-                        showShowVehicleDetailsMenu();
+                        ShowVehicleDetailsMenu.ShowShowVehicleDetailsMenu(i_MyGarage);
                         break;
                     }
             }
         }
-
-        // -----------------------------------------------------END choose sub menus
-
-        // ----------------------------------------------------- sub menus
-
-
-
-        private static void showShowVehiclesMenu()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void showInflateVehicleTiresMenu()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void showFuelGasVehicleMenu()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void showChargeElectricVehicleMenu()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void showShowVehicleDetailsMenu()
-        {
-            throw new NotImplementedException();
-        }
-
-        // -----------------------------------------------------END sub menus
 
         private static int showMainGarageMenuAndGetUserInput()
         {
@@ -147,8 +105,6 @@ namespace Ex03.ConsoleUI
 
             return userSelection;
         }
-
     }
-
 }
 

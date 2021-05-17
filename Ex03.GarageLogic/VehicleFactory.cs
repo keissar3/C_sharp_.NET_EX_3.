@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-
     public class VehicleFactory
     {
         private static readonly List<string> r_VehiclesList = new List<string>()
@@ -59,11 +52,10 @@ namespace Ex03.GarageLogic
                 default:
                     throw new ArgumentException("Vehicle type is not supported! ");
             }
-
             return vehicleSpecs;
         }
 
-        private static List<string> getGasBikeSpecs() //TODO MAKE SURE SPECS MATCH WHAT IS NEEDED  
+        private static List<string> getGasBikeSpecs()
         {
             List<string> specsList = new List<string>();
             specsList.Add("Vehicle Model");
@@ -74,8 +66,7 @@ namespace Ex03.GarageLogic
             specsList.Add("Gas Gauge");
             return specsList;
         }
-
-        private static List<string> getGasTruckSpecs() //TODO MAKE SURE SPECS MATCH WHAT IS NEEDED  
+        private static List<string> getGasTruckSpecs() //
         {
             List<string> specsList = new List<string>();
 
@@ -87,8 +78,7 @@ namespace Ex03.GarageLogic
             specsList.Add("Payload Capacity");
             return specsList;
         }
-
-        private static List<string> getElectricCarSpecs() //TODO MAKE SURE SPECS MATCH WHAT IS NEEDED 
+        private static List<string> getElectricCarSpecs()
         {
             List<string> specsList = new List<string>();
             specsList.Add("Vehicle Model");
@@ -100,8 +90,7 @@ namespace Ex03.GarageLogic
 
             return specsList;
         }
-
-        private static List<string> getGasCarSpecs() //TODO MAKE SURE SPECS MATCH WHAT IS NEEDED 
+        private static List<string> getGasCarSpecs() //
         {
             List<string> specsList = new List<string>();
             specsList.Add("Vehicle Model");
@@ -114,7 +103,7 @@ namespace Ex03.GarageLogic
             return specsList;
         }
 
-        private static List<string> getElectricBikeSpecs() //TODO MAKE SURE SPECS MATCH WHAT IS NEEDED 
+        private static List<string> getElectricBikeSpecs()
         {
             List<string> specsList = new List<string>();
             specsList.Add("Vehicle Model");
@@ -126,7 +115,6 @@ namespace Ex03.GarageLogic
 
             return specsList;
         }
-
 
         public static Vehicle CreateVehicle(string i_VehicleToBuild, Dictionary<string, string> i_VehicleSpecs,
             string i_LicensePlateNumber)
@@ -152,27 +140,25 @@ namespace Ex03.GarageLogic
                 default:
                     throw new ArgumentException("Vehicle type is not supported! ");
             }
-
             return vehicleToReturn;
-
         }
 
         private static Bike.eLicenseType getLicenseType(string i_LicenseType)
         {
-            Bike.eLicenseType licenceType;
+            Bike.eLicenseType licenseType;
             switch (i_LicenseType)
             {
                 case "A":
-                    licenceType = Bike.eLicenseType.A;
+                    licenseType = Bike.eLicenseType.A;
                     break;
                 case "B1":
-                    licenceType = Bike.eLicenseType.B1;
+                    licenseType = Bike.eLicenseType.B1;
                     break;
                 case "AA":
-                    licenceType = Bike.eLicenseType.AA;
+                    licenseType = Bike.eLicenseType.AA;
                     break;
                 case "BB":
-                    licenceType = Bike.eLicenseType.BB;
+                    licenseType = Bike.eLicenseType.BB;
                     break;
                 default:
                     throw new ValueOutOfRangeException(@"The licenses type we support is only: 
@@ -180,20 +166,16 @@ A
 B1
 AA
 BB");
-
             }
-
-            return licenceType;
+            return licenseType;
         }
 
         private static int getEngineVolume(string i_EngineVolume)
         {
-            int engineVolume;
-            if (int.TryParse(i_EngineVolume, out engineVolume) == false)
+            if (int.TryParse(i_EngineVolume, out int engineVolume) == false)
             {
                 throw new FormatException("Engine volume must be a number");
             }
-
             return engineVolume;
         }
 
@@ -210,24 +192,22 @@ BB");
                 throw new ValueOutOfRangeException(String.Format("The current tire pressure need to be less than {0}.",
                     i_MaxTirePressure));
             }
-
             return currentTirePressure;
         }
 
         private static float getCurrentChargeOrGauge(string i_ChargeOrGauge, float i_Capacity)
         {
-            float currenyChargeOrGauge;
-            if (float.TryParse(i_ChargeOrGauge, out currenyChargeOrGauge) == false)
+            if (float.TryParse(i_ChargeOrGauge, out float currencyChargeOrGauge) == false)
             {
                 throw new FormatException("Energy entered must be a number.");
             }
 
-            if (currenyChargeOrGauge > i_Capacity)
+            if (currencyChargeOrGauge > i_Capacity)
             {
                 throw new ValueOutOfRangeException(string.Format("The Energy level need to be less than {0}", i_Capacity));
             }
 
-            return currenyChargeOrGauge;
+            return currencyChargeOrGauge;
         }
         private static Car.eColor getCarColor(string i_CarColor)
         {
@@ -408,9 +388,7 @@ No");
                 30, 2);
 
             Bike resultBike = new Bike(licenseType, engineVolume, arrayOfWheels, engine, vehicleModel, i_LicensePlateNumber);
-
             return resultBike;
-
         }
     }
 }

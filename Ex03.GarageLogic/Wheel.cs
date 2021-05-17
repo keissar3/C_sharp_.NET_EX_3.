@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -43,7 +40,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         public void InflateTire(float i_AirToAdd)
         {
             if (m_TirePressure + i_AirToAdd > m_MaxTirePressure)
@@ -53,6 +49,14 @@ namespace Ex03.GarageLogic
 
             m_TirePressure += i_AirToAdd;
         }
-    }
 
+        public override string ToString()
+        {
+            StringBuilder wheelDescription = new StringBuilder();
+            wheelDescription.AppendFormat("Wheel manufacturer:    {0} {1}", m_Manufacturer, Environment.NewLine);
+            wheelDescription.AppendFormat("Current tire pressure: {0} {1}", m_TirePressure, Environment.NewLine);
+            wheelDescription.AppendFormat("Max tire pressure:     {0} {1}", m_MaxTirePressure, Environment.NewLine);
+            return wheelDescription.ToString();
+        }
+    }
 }

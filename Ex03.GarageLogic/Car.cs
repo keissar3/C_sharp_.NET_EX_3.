@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Ex03.GarageLogic
 {
+    using System;
+    using System.Text;
     class Car : Vehicle
     {
         public enum eColor
@@ -24,8 +20,7 @@ namespace Ex03.GarageLogic
             _4 = 4,
             _5 = 5,
         }
-
-
+        
         private eColor m_Color;
         private eDoorCount m_DoorCount;
 
@@ -40,5 +35,15 @@ namespace Ex03.GarageLogic
             WheelCount = 4;
         }
 
+        public override string ToString()
+        {
+            string vehicleDescription = base.ToString();
+            StringBuilder carDescription = new StringBuilder();
+            carDescription.AppendFormat("Door count:   {0} {1}", m_DoorCount, Environment.NewLine);
+            carDescription.AppendFormat("Doors color:  {0} {1}", m_Color, Environment.NewLine);
+            vehicleDescription += carDescription.ToString();
+            return vehicleDescription;
+        }
     }
 }
+

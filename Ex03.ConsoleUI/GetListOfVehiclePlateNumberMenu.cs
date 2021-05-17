@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.ConsoleUI
+﻿namespace Ex03.ConsoleUI
 {
+    using System;
+    using System.Collections.Generic;
     using GarageLogic;
+
     enum eGetVehiclesListMenu
     {
         AllVehicles = 1,
@@ -14,6 +11,7 @@ namespace Ex03.ConsoleUI
         FixedVehicles,
         PaidVehicles
     }
+
     internal class GetListOfVehiclePlateNumberMenu
     {
         public static void ShowGetListOfVehiclePlateNumberMenu(GarageLogic i_MyGarage)
@@ -76,6 +74,7 @@ namespace Ex03.ConsoleUI
             Console.Clear();
             return userSelection;
         }
+
         private static void presentVehiclesPlateNumberList(GarageLogic i_MyGarage)
         {
             List<Record> records = i_MyGarage.Records;
@@ -86,6 +85,7 @@ namespace Ex03.ConsoleUI
             Console.Write("Press any key to continue");
             string k = Console.ReadLine();
         }
+
         private static void presentFixedVehiclesPlateNumberList(GarageLogic i_MyGarage)
         {
             List<Record> records = i_MyGarage.Records;
@@ -99,6 +99,7 @@ namespace Ex03.ConsoleUI
             Console.Write("Press any key to continue");
             string k = Console.ReadLine();
         }
+
         private static void presentPaidVehiclesPlateNumberList(GarageLogic i_MyGarage)
         {
             List<Record> records = i_MyGarage.Records;
@@ -112,6 +113,7 @@ namespace Ex03.ConsoleUI
             Console.Write("Press any key to continue");
             string k = Console.ReadLine();
         }
+
         private static void presentRepairedVehiclesPlateNumberList(GarageLogic i_MyGarage)
         {
             List<Record> records = i_MyGarage.Records;

@@ -7,7 +7,7 @@
     internal class InflateVehicleTiresMenu
     {
 
-        public static void ShowInflateVehicleTiresMenu(GarageLogic i_MyGarage)
+        internal static void ShowInflateVehicleTiresMenu(GarageLogic i_MyGarage)
         {
             Console.Clear();
             Console.WriteLine("Please enter vehicle license plate");
@@ -24,12 +24,8 @@
             {
                 Thread.Sleep(3000);
                 Console.WriteLine("License plate doesn't exist in our system");
-
             }
-
-
         }
-
 
         private static float getValidAirPressure(Vehicle i_UserCar)
         {

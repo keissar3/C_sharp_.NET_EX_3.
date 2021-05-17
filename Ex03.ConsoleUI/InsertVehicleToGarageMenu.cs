@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-
-namespace Ex03.ConsoleUI
+﻿namespace Ex03.ConsoleUI
 {
+    using System;
+    using System.Threading;
+    using System.Collections.Generic;
     using GarageLogic;
-
-
 
     internal class InsertVehicleToGarageMenu
     {
@@ -61,7 +52,6 @@ namespace Ex03.ConsoleUI
                 throw;
             }
             Console.Clear(); ;
-
         }
 
         private static string getFromUserTypeOfVehicle()
@@ -79,9 +69,10 @@ namespace Ex03.ConsoleUI
 
             return vehicleTypeToInsert;
         }
-        private static void getInformationAboutTheVehicleFromUserAndCreateIt(string i_LicensePlate, string i_vehicleType, GarageLogic i_MyGarage, string i_OwnerName, string i_OwnerPhoneNumber)
+
+        private static void getInformationAboutTheVehicleFromUserAndCreateIt(string i_LicensePlate, string i_VehicleType, GarageLogic i_MyGarage, string i_OwnerName, string i_OwnerPhoneNumber)
         {
-            List<string> vehicleSpecsNeeded = VehicleFactory.GetVehicleSpecs(i_vehicleType);
+            List<string> vehicleSpecsNeeded = VehicleFactory.GetVehicleSpecs(i_VehicleType);
 
             Dictionary<string, string> specsOfVehicleToBuild = new Dictionary<string, string>();
 
@@ -93,7 +84,7 @@ namespace Ex03.ConsoleUI
 
             try
             {
-                Vehicle vehicleToAdd = VehicleFactory.CreateVehicle(i_vehicleType, specsOfVehicleToBuild, i_LicensePlate);
+                Vehicle vehicleToAdd = VehicleFactory.CreateVehicle(i_VehicleType, specsOfVehicleToBuild, i_LicensePlate);
                 Record recordToAdd = new Record(i_OwnerName, i_OwnerPhoneNumber, vehicleToAdd);
                 i_MyGarage.AddVehicleToGarageRecords(recordToAdd);
             }
@@ -102,14 +93,14 @@ namespace Ex03.ConsoleUI
                 Console.Clear();
                 Console.WriteLine(exception.Message);
                 specsOfVehicleToBuild.Clear();
-                getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate, i_vehicleType, i_MyGarage, i_OwnerName, i_OwnerPhoneNumber);
+                getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate, i_VehicleType, i_MyGarage, i_OwnerName, i_OwnerPhoneNumber);
             }
             catch (ValueOutOfRangeException exception)
             {
                 Console.Clear();
                 Console.WriteLine(exception.Message);
                 specsOfVehicleToBuild.Clear();
-                getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate, i_vehicleType, i_MyGarage, i_OwnerName, i_OwnerPhoneNumber);
+                getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate, i_VehicleType, i_MyGarage, i_OwnerName, i_OwnerPhoneNumber);
 
             }
             catch (Exception exception)
@@ -117,10 +108,9 @@ namespace Ex03.ConsoleUI
                 Console.Clear();
                 Console.WriteLine(exception.Message);
                 specsOfVehicleToBuild.Clear();
-                getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate, i_vehicleType, i_MyGarage, i_OwnerName,
+                getInformationAboutTheVehicleFromUserAndCreateIt(i_LicensePlate, i_VehicleType, i_MyGarage, i_OwnerName,
                     i_OwnerPhoneNumber);
             }
-
         }
     }
 }

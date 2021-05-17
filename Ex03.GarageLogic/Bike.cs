@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+    using System.Text;
     class Bike : Vehicle
     {
         public enum eLicenseType
@@ -46,8 +41,14 @@ namespace Ex03.GarageLogic
 
         }
 
-
+        public override string ToString()
+        {
+            string vehicleDescription = base.ToString();
+            StringBuilder bikeDescription = new StringBuilder();
+            bikeDescription.AppendFormat("License type:  {0} {1}", m_LicenseType, Environment.NewLine);
+            bikeDescription.AppendFormat("Engine volume: {0} {1}", m_EngineVolume, Environment.NewLine);
+            vehicleDescription += bikeDescription.ToString();
+            return vehicleDescription;
+        }
     }
-
-
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System.Collections.Generic;
     public class GarageLogic
     {
         private List<Record> m_Records = new List<Record>();
@@ -28,6 +23,7 @@ namespace Ex03.GarageLogic
 
             return isFound;
         }
+
         public Vehicle GetVehicleByLicensePlate(string i_LicensePlateNumber)
         {
             Vehicle carToReturn = null;
@@ -40,6 +36,20 @@ namespace Ex03.GarageLogic
             }
 
             return carToReturn;
+        }
+
+        public Record GetRecordByLicensePlate(string i_LicensePlateNumber)
+        {
+            Record recordToReturn = null;
+            foreach (var record in m_Records)
+            {
+                if (record.Vehicle.LicensePlateNumber == i_LicensePlateNumber)
+                {
+                    recordToReturn = record;
+                }
+            }
+
+            return recordToReturn;
         }
 
         public List<Record> Records
@@ -60,7 +70,5 @@ namespace Ex03.GarageLogic
                 }
             }
         }
-
-
     }
 }

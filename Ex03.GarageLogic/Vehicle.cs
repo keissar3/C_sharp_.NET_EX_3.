@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System.Text;
+    using System;
     public abstract class Vehicle
     {
         string m_ModelName;
         string m_LicensePlateNumber;
-        //  float m_Energy; //TODO need to decide whether to keep it or not 
         Wheel[] m_Wheels;
         Engine m_Engine;
         int m_WheelsCount;
 
-      
         public string LicensePlateNumber
         {
             get
@@ -35,6 +29,7 @@ namespace Ex03.GarageLogic
                 wheel.InflateTire(i_AirToAdd);
             }
         }
+
         public string ModelName
         {
             get
@@ -58,17 +53,22 @@ namespace Ex03.GarageLogic
                 m_WheelsCount = value;
             }
         }
-        //public float Energy
-        //{
-        //    get
-        //    {
-        //        return m_Energy;
-        //    }
-        //    set
-        //    {
-        //        m_Energy = value;
-        //    }
-        //}
+        public float Energy
+        {
+            get
+            {
+                float energyPercentage = 0;
+                if(Engine is GasEngine)
+                {
+                    energyPercentage = (Engine as GasEngine).GasGague / (Engine as GasEngine).GasCapacity * 100;
+                }
+                if (Engine is ElectricEngine)
+                {
+                    energyPercentage = (Engine as ElectricEngine).BatteryCharge / (Engine as ElectricEngine).BatteryCapacity * 100;
+                }
+                return energyPercentage;
+            }
+        }
 
         public Wheel[] Wheels
         {
@@ -92,6 +92,23 @@ namespace Ex03.GarageLogic
             {
                 m_Engine = value;
             }
+        }
+
+        public override string ToString()
+        {
+
+            StringBuilder vehicleDescription = new StringBuilder();
+            vehicleDescription.AppendLine("Vehicle Description:");
+            vehicleDescription.AppendFormat("Vehicle Type          {0} {1}", GetType().Name, Environment.NewLine);
+            vehicleDescription.AppendFormat("Engine Type           {0} {1}", m_Engine.GetType().Name, Environment.NewLine);
+            vehicleDescription.AppendFormat("Model:                {0} {1}", m_ModelName, Environment.NewLine);
+            vehicleDescription.AppendFormat("License plate number: {0} {1}", m_LicensePlateNumber, Environment.NewLine);
+            vehicleDescription.AppendFormat("Wheels count:         {0} {1}", m_WheelsCount, Environment.NewLine);
+            vehicleDescription.AppendFormat("Energy left :{0:00.00}% {1}", this.Energy, Environment.NewLine);
+            vehicleDescription.AppendFormat(m_Wheels[0].ToString());
+            vehicleDescription.AppendFormat(m_Engine.ToString());
+
+            return vehicleDescription.ToString();
         }
     }
 }
