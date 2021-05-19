@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+
+namespace Ex03.GarageLogic
 {
     using System.Text;
     using System;
@@ -10,6 +12,8 @@
         Engine m_Engine;
         int m_WheelsCount;
 
+        public abstract List<string> GetsSpecs();
+        public abstract void SetProperties(string i_Property, object i_Value);
         public string LicensePlateNumber
         {
             get
@@ -21,7 +25,6 @@
                 m_LicensePlateNumber = value;
             }
         }
-
         public void InflateAllTires(float i_AirToAdd)
         {
             foreach (Wheel wheel in m_Wheels)

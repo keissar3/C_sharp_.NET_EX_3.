@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Text;
+using System.Xml;
 
 namespace Ex03.GarageLogic
 {
@@ -9,13 +11,22 @@ namespace Ex03.GarageLogic
         private float m_TirePressure;
         private float m_MaxTirePressure;
 
-        public Wheel(string i_Manufacturer, float i_TirePressure, float i_MaxTirePressure)
+        public Wheel(float i_MaxTirePressure)
         {
-            m_Manufacturer = i_Manufacturer;
-            m_TirePressure = i_TirePressure;
             m_MaxTirePressure = i_MaxTirePressure;
         }
 
+        public string WheelsManufacturer
+        {
+            get
+            {
+                return m_Manufacturer;
+            }
+            set
+            {
+                m_Manufacturer = value;
+            }
+        }
         public float CurrentTirePressure
         {
             get
@@ -24,7 +35,15 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                m_TirePressure = value;
+                if (value < m_MaxTirePressure)
+                {
+                    m_TirePressure = value;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(string.Format("The current tire pressure need to be less than {0}.",
+                        m_MaxTirePressure));
+                }
             }
         }
 
@@ -50,6 +69,32 @@ namespace Ex03.GarageLogic
             m_TirePressure += i_AirToAdd;
         }
 
+        public static Wheel[] CreateWheelsArray(float i_MaxTirePressure, int i_WheelsCount)
+        {
+            Wheel[] wheelsArray = new Wheel[i_WheelsCount];
+            for (int i = 0; i < i_WheelsCount; i++)
+            {
+                wheelsArray[i] = new Wheel(i_MaxTirePressure);
+            }
+
+            return wheelsArray;
+        }
+
+        public static void SetWheelsManufacturer(Wheel[] i_WheelsArray, int i_WheelsCount, string i_WheelManuFacturer)
+        {
+            for (int i = 0; i < i_WheelsCount; i++)
+            {
+                i_WheelsArray[i].WheelsManufacturer = i_WheelManuFacturer;
+            }
+        }
+
+        public static void SetWheelsCurrentTirePressure(Wheel[] i_WheelsArray, int i_WheelsCount, float i_CurrentTirePressure)
+        {
+            for (int i = 0; i < i_WheelsCount; i++)
+            {
+                i_WheelsArray[i].CurrentTirePressure = i_CurrentTirePressure;
+            }
+        }
         public override string ToString()
         {
             StringBuilder wheelDescription = new StringBuilder();
@@ -58,5 +103,6 @@ namespace Ex03.GarageLogic
             wheelDescription.AppendFormat("Max tire pressure:     {0} {1}", m_MaxTirePressure, Environment.NewLine);
             return wheelDescription.ToString();
         }
+
     }
 }

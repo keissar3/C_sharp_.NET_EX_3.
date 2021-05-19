@@ -1,19 +1,20 @@
 ﻿
+using System.Collections.Generic;
+
 namespace Ex03.GarageLogic
 {
     using System;
     using System.Text;
     class Car : Vehicle
     {
-        public enum eColor
+        internal enum eColor
         {
             Red,
             Silver,
             White,
             Black
         }
-
-        public enum eDoorCount
+        internal enum eDoorCount
         {
             _2 = 2,
             _3 = 3,
@@ -24,17 +25,156 @@ namespace Ex03.GarageLogic
         private eColor m_Color;
         private eDoorCount m_DoorCount;
 
-        public Car(Wheel[] i_Wheels, Engine i_Engine, string i_ModelName, string i_LicensePlateNumber, eColor i_Color, eDoorCount i_DoorCount)
+        public Car(eTypeOfEngine i_TypeOfEngine, string i_LicensePlateNumber)
         {
-            Wheels = i_Wheels;
-            Engine = i_Engine;
-            ModelName = i_ModelName;
+
+            Engine engine = null;
+            switch (i_TypeOfEngine)
+            {
+                case eTypeOfEngine.Gas:
+                    engine = new GasEngine(eGasType.Octan95, 45);
+                    break;
+                case eTypeOfEngine.Electric:
+                    engine = new ElectricEngine(3.2f);
+                    break;
+            }
+            Engine = engine;
             LicensePlateNumber = i_LicensePlateNumber;
-            m_Color = i_Color;
-            m_DoorCount = i_DoorCount;
             WheelCount = 4;
+            Wheels = Wheel.CreateWheelsArray(32, WheelCount);
+        }
+        public override void SetProperties(string i_Property, object i_Value)
+        {
+            switch (i_Property)
+            {
+                case "Vehicle Model":
+                    ModelName = (string)i_Value; //TODO מותר לי לעשות ככה? הרי אני יודעת בוודאות שזה סטרינג
+                    break;
+                case "Wheels Manufacturer":
+                    Wheel.SetWheelsManufacturer(Wheels, WheelCount, (string)i_Value);
+                    break;
+                case "Wheels Current Tire Pressure":
+                    float currentTirePressure = TryToParse.Float((string)i_Value, "Wheels Current Tire Pressure must be a number");
+                    Wheel.SetWheelsCurrentTirePressure(Wheels, WheelCount, currentTirePressure);
+                    break;
+                case "Car Color":
+                     CarColor= CheckCarColor((string)i_Value);
+                    break;
+                case "Doors Count":
+                    DoorCount = CheckDoorCount((string) i_Value);
+                    break;
+                case "Gas Gauge":
+                    float gasGauge = TryToParse.Float((string)i_Value, "Gas gauge must be a number.");
+                    GasEngine GasEngine = Engine as GasEngine;
+                    GasEngine.GasGague = gasGauge;
+                    break;
+                case "Battery Charge":
+                    float batteryCharge = TryToParse.Float((string)i_Value, "Battery charge must be a number.");
+                    ElectricEngine ElctricEngine = Engine as ElectricEngine;
+                    ElctricEngine.BatteryCharge = batteryCharge;
+                    break;
+            }
+        }
+        private  Car.eDoorCount CheckDoorCount(string i_DoorsCount)
+        {
+            Car.eDoorCount carDoorsCount;
+
+            switch (i_DoorsCount)
+            {
+                case "2":
+                    carDoorsCount = Car.eDoorCount._2;
+                    break;
+                case "3":
+                    carDoorsCount = Car.eDoorCount._3;
+                    break;
+                case "4":
+                    carDoorsCount = Car.eDoorCount._4;
+                    break;
+                case "5":
+                    carDoorsCount = Car.eDoorCount._5;
+                    break;
+                default:
+                    throw new ValueOutOfRangeException(@"The number of doors we support is only:
+2
+3
+4
+5");
+            }
+
+            return carDoorsCount;
+
         }
 
+        private Car.eColor CheckCarColor(string i_CarColor)
+        {
+            Car.eColor carColor;
+
+            switch (i_CarColor)
+            {
+                case "Black":
+                    carColor = Car.eColor.Black;
+                    break;
+                case "Red":
+                    carColor = Car.eColor.Red;
+                    break;
+                case "Silver":
+                    carColor = Car.eColor.Silver;
+                    break;
+                case "White":
+                    carColor = Car.eColor.White;
+                    break;
+                default:
+                    throw new ValueOutOfRangeException(@"The color type we support is only: 
+Black
+Red
+Silver
+White");
+            }
+
+            return carColor;
+        }
+        public eColor CarColor
+        {
+            get
+            {
+                return m_Color;
+            }
+            set
+            {
+                m_Color = value;
+            }
+        }
+        public eDoorCount DoorCount
+        {
+            get
+            {
+                return m_DoorCount;
+            }
+            set
+            {
+                m_DoorCount = value;
+            }
+        }
+
+        public override List<string> GetsSpecs()
+        {
+            List<string> specsList = new List<string>();
+            specsList.Add("Vehicle Model");
+            specsList.Add("Wheels Manufacturer");
+            specsList.Add("Wheels Current Tire Pressure");
+            specsList.Add("Car Color");
+            specsList.Add("Doors Count");
+            if (Engine is GasEngine)
+            {
+                specsList.Add("Gas Gauge");
+            }
+            else if (Engine is ElectricEngine)
+            {
+                specsList.Add("Battery Charge");
+            }
+
+            return specsList;
+        }
         public override string ToString()
         {
             string vehicleDescription = base.ToString();

@@ -27,8 +27,17 @@
             }
             set
             {
-                m_GasGauge = value;
+                if (value < m_GasCapacity)
+                {
+                    m_GasGauge = value;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(string.Format("The Gas Gauge need to be less than {0}",
+                        m_GasCapacity));
+                }
             }
+
         }
         public float GasCapacity
         {
@@ -42,10 +51,9 @@
             }
         }
 
-        public GasEngine(eGasType i_GasType, float i_GasGauge, float i_GasCapacity)
+        public GasEngine(eGasType i_GasType,  float i_GasCapacity)
         {
             m_GasType = i_GasType;
-            m_GasGauge = i_GasGauge;
             m_GasCapacity = i_GasCapacity;
         }
         public void FillUpGas(float i_GasLiters, eGasType i_GasType)

@@ -18,28 +18,38 @@
         {
             Console.Clear();
             int userSelection = getUserSelection();
+            string messege=null;
             switch (userSelection)
             {
-                case (int)eGetVehiclesListMenu.AllVehicles:
-                    {
-                        presentVehiclesPlateNumberList(i_MyGarage);
-                        break;
-                    }
-                case (int)eGetVehiclesListMenu.FixedVehicles:
-                    {
-                        presentFixedVehiclesPlateNumberList(i_MyGarage);
-                        break;
-                    }
-                case (int)eGetVehiclesListMenu.PaidVehicles:
-                    {
-                        presentPaidVehiclesPlateNumberList(i_MyGarage);
-                        break;
-                    }
-                case (int)eGetVehiclesListMenu.RepairedVehicles:
-                    {
-                        presentRepairedVehiclesPlateNumberList(i_MyGarage);
-                        break;
-                    }
+                case (int) eGetVehiclesListMenu.AllVehicles:
+                {
+                    presentVehiclesPlateNumberList(i_MyGarage.Records);
+                    break;
+                }
+                case (int) eGetVehiclesListMenu.FixedVehicles:
+                {
+                    List<Record> fixedVehicleList =
+                        i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.isFixed, ref messege);
+                    Console.WriteLine(messege);
+                    presentVehiclesPlateNumberList(fixedVehicleList);
+                    break;
+                }
+                case (int) eGetVehiclesListMenu.PaidVehicles:
+                {
+                    List<Record> paidVehicleList =
+                        i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.isPaidUp, ref messege);
+                    Console.WriteLine(messege);
+                    presentVehiclesPlateNumberList(paidVehicleList);
+                    break;
+                }
+                case (int) eGetVehiclesListMenu.RepairedVehicles:
+                {
+                    List<Record> repairedVehicleList =
+                        i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.inRepair, ref messege);
+                    Console.WriteLine(messege);
+                    presentVehiclesPlateNumberList(repairedVehicleList) ;
+                    break;
+                }
             }
         }
 
@@ -71,59 +81,18 @@
                     Console.WriteLine("Invalid selection please try again! ");
                 }
             }
+
             Console.Clear();
             return userSelection;
         }
 
-        private static void presentVehiclesPlateNumberList(GarageLogic i_MyGarage)
+        private static void presentVehiclesPlateNumberList(List<Record> i_Records)
         {
-            List<Record> records = i_MyGarage.Records;
-            foreach (var record in records)
+            foreach (var record in i_Records)
             {
                 Console.WriteLine(record.Vehicle.LicensePlateNumber);
             }
-            Console.Write("Press any key to continue");
-            string k = Console.ReadLine();
-        }
 
-        private static void presentFixedVehiclesPlateNumberList(GarageLogic i_MyGarage)
-        {
-            List<Record> records = i_MyGarage.Records;
-            foreach (var record in records)
-            {
-                if (record.VehicleStatus == Record.eVehicleStatus.isFixed)
-                {
-                    Console.WriteLine(record.Vehicle.LicensePlateNumber);
-                }
-            }
-            Console.Write("Press any key to continue");
-            string k = Console.ReadLine();
-        }
-
-        private static void presentPaidVehiclesPlateNumberList(GarageLogic i_MyGarage)
-        {
-            List<Record> records = i_MyGarage.Records;
-            foreach (var record in records)
-            {
-                if (record.VehicleStatus == Record.eVehicleStatus.isPaidUp)
-                {
-                    Console.WriteLine(record.Vehicle.LicensePlateNumber);
-                }
-            }
-            Console.Write("Press any key to continue");
-            string k = Console.ReadLine();
-        }
-
-        private static void presentRepairedVehiclesPlateNumberList(GarageLogic i_MyGarage)
-        {
-            List<Record> records = i_MyGarage.Records;
-            foreach (var record in records)
-            {
-                if (record.VehicleStatus == Record.eVehicleStatus.inRepair)
-                {
-                    Console.WriteLine(record.Vehicle.LicensePlateNumber);
-                }
-            }
             Console.Write("Press any key to continue");
             string k = Console.ReadLine();
         }

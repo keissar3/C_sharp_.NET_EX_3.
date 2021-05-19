@@ -1,10 +1,12 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+
+namespace Ex03.GarageLogic
 {
     using System;
     using System.Text;
-    class Bike : Vehicle
-    {
-        public enum eLicenseType
+    class Bike : Vehicle 
+    { 
+       internal enum eLicenseType
         {
             A = 1,
             B1,
@@ -15,18 +17,26 @@
         private eLicenseType m_LicenseType;
         private int m_EngineVolume;
 
-        public Bike(eLicenseType i_LicenseType, int i_EngineVolume, Wheel[] i_Wheels, Engine i_Engine,
-            string i_ModelName, string i_LicensePlateNumber)
+        public Bike( eTypeOfEngine i_TypeOfEngine, string i_LicensePlateNumber)
         {
-            m_LicenseType = i_LicenseType;
-            m_EngineVolume = i_EngineVolume;
-            Wheels = i_Wheels;
-            Engine = i_Engine;
-            ModelName = i_ModelName;
-            LicensePlateNumber = i_LicensePlateNumber;
-            WheelCount = 2;
+            Engine engine=null;
+            switch (i_TypeOfEngine)
+            {
+                case eTypeOfEngine.Gas:
+                    engine = new GasEngine(eGasType.Octan98, 6);
+                    break;
+                case eTypeOfEngine.Electric: 
+                    engine = new ElectricEngine(1.8f);
+                    break;
+            }
 
+            LicensePlateNumber = i_LicensePlateNumber;
+            Engine = engine;
+            WheelCount = 2;
+            Wheels = Wheel.CreateWheelsArray(30, WheelCount);
         }
+
+
 
         public int EngineVolume
         {
@@ -38,7 +48,79 @@
             {
                 m_EngineVolume = value;
             }
+        }
 
+        public eLicenseType LicenseType
+        {
+            get
+            {
+                return m_LicenseType;
+            }
+            set
+            {
+
+                m_LicenseType = value;
+            }
+        }
+
+        public override void SetProperties(string i_Property, object i_Value)
+        {
+            switch (i_Property)
+            {
+                case "Vehicle Model":
+                    ModelName = (string)i_Value; //TODO מותר לי לעשות ככה? הרי אני יודעת בוודאות שזה סטרינג
+                    break;
+                case "License Type":
+                    LicenseType = CheckLicenseType((string) i_Value);
+                    break;
+                case "Wheels Manufacturer":
+                    Wheel.SetWheelsManufacturer(Wheels,WheelCount,(string)i_Value);
+                    break;
+                case "Wheels Current Tire Pressure":
+                    float currentTirePressure = TryToParse.Int((string)i_Value, "Wheels Current Tire Pressure must be a number");
+                   Wheel.SetWheelsCurrentTirePressure(Wheels,WheelCount,currentTirePressure);
+                    break;
+                case "Engine Volume":
+                    int engineVolume = TryToParse.Int((string) i_Value, "Engine volume must be a number.");
+                    EngineVolume = engineVolume;
+                    break;
+                case "Gas Gauge":
+                    float gasGauge = TryToParse.Float((string)i_Value, "Gas gauge must be a number.");
+                    GasEngine GasEngine = Engine as GasEngine;
+                    GasEngine.GasGague = gasGauge;
+                    break;
+                case "Battery Charge":
+                    float batteryCharge = TryToParse.Float((string)i_Value, "Battery charge must be a number.");
+                    ElectricEngine ElctricEngine = Engine as ElectricEngine;
+                    ElctricEngine.BatteryCharge = batteryCharge;
+                    break;
+            }
+        }
+        private Bike.eLicenseType CheckLicenseType(string i_LicenseType)
+        {
+            Bike.eLicenseType licenseType;
+            switch (i_LicenseType)
+            {
+                case "A":
+                    licenseType = Bike.eLicenseType.A;
+                    break;
+                case "B1":
+                    licenseType = Bike.eLicenseType.B1;
+                    break;
+                case "AA":
+                    licenseType = Bike.eLicenseType.AA;
+                    break;
+                case "BB":
+                    licenseType = Bike.eLicenseType.BB;
+                    break;
+                default:
+                    throw new ValueOutOfRangeException(@"The licenses type we support is only: 
+A
+B1
+AA
+BB");
+            }
+            return licenseType;
         }
 
         public override string ToString()
@@ -49,6 +131,26 @@
             bikeDescription.AppendFormat("Engine volume: {0} {1}", m_EngineVolume, Environment.NewLine);
             vehicleDescription += bikeDescription.ToString();
             return vehicleDescription;
+        }
+
+        public override List<string> GetsSpecs()
+        {
+            List<string> specsList = new List<string>();
+            specsList.Add("Vehicle Model");
+            specsList.Add("License Type");
+            specsList.Add("Wheels Manufacturer");
+            specsList.Add("Wheels Current Tire Pressure");
+            specsList.Add("Engine Volume");
+
+            if (Engine is GasEngine)
+            {
+                specsList.Add("Gas Gauge");
+            }
+            else if (Engine is ElectricEngine)
+            {
+                specsList.Add("Battery Charge");
+            }
+            return specsList;
         }
     }
 }

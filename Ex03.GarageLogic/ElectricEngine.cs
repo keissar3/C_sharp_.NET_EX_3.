@@ -16,7 +16,15 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                m_BatteryCharge = value;
+                if (value < m_BatteryCapacity)
+                {
+                    m_BatteryCharge = value;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(string.Format("The Energy level need to be less than {0}",
+                        m_BatteryCapacity));
+                }
             }
         }
 
@@ -32,9 +40,8 @@ namespace Ex03.GarageLogic
             }
         }
         
-        public ElectricEngine(float i_BatteryCharge, float i_BatteryCapacity)
+        public ElectricEngine( float i_BatteryCapacity)
         {
-            m_BatteryCharge = i_BatteryCharge;
             m_BatteryCapacity = i_BatteryCapacity;
         }
 

@@ -1,25 +1,84 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+
+namespace Ex03.GarageLogic
 {
     using System;
     using System.Text;
+
     class Truck : Vehicle
     {
         private bool m_IsTransportingHazardousMaterials;
         private float m_PayloadCapacity;
 
-        public Truck(Wheel[] i_Wheels, Engine i_Engine,
-            string i_ModelName, string i_LicensePlateNumber, bool i_IsTransportingHazardousMaterials,
-            float i_PayloadCapacity)
+        public Truck(string i_LicensePlateNumber)
         {
-            Wheels = i_Wheels;
-            Engine = i_Engine;
-            ModelName = i_ModelName;
+            Engine = new GasEngine(eGasType.Soler, 120);
             LicensePlateNumber = i_LicensePlateNumber;
-            m_IsTransportingHazardousMaterials = i_IsTransportingHazardousMaterials;
-            m_PayloadCapacity = i_PayloadCapacity;
+
             WheelCount = 16;
+            Wheels = Wheel.CreateWheelsArray(26, WheelCount);
+        }
+        public override void SetProperties(string i_Property, object i_Value)
+        {
+            switch (i_Property)
+            {
+                case "Vehicle Model":
+                    ModelName = (string) i_Value; //TODO מותר לי לעשות ככה? הרי אני יודעת בוודאות שזה סטרינג
+                    break;
+                case "Wheels Manufacturer":
+                    Wheel.SetWheelsManufacturer(Wheels, WheelCount, (string)i_Value);
+                    break;
+                case "Wheels Current Tire Pressure":
+                    float currentTirePressure =
+                        TryToParse.Float((string) i_Value, "Wheels Current Tire Pressure must be a number");
+                    Wheel.SetWheelsCurrentTirePressure(Wheels, WheelCount, currentTirePressure);
+                    break;
+                case "Is Transporting Hazardous Materials?":
+                    m_IsTransportingHazardousMaterials = checkIsTransportingHazardousMaterials((string) i_Value);
+                    break;
+                case "Payload Capacity":
+                    m_PayloadCapacity = TryToParse.Float((string)i_Value, "The payload capacity must be a number.");
+                    break;
+                case "Gas Gauge":
+                    float gasGauge = TryToParse.Float((string)i_Value, "Gas gauge must be a number.");
+                    GasEngine GasEngine = Engine as GasEngine;
+                    GasEngine.GasGague = gasGauge;
+                    break;
+            }
         }
 
+        private bool checkIsTransportingHazardousMaterials(string i_IsTransportingHazardousMaterials)
+        {
+            bool isTransportingHazardousMaterials;
+            switch (i_IsTransportingHazardousMaterials)
+            {
+                case "Yes":
+                    isTransportingHazardousMaterials = true;
+                    break;
+                case "No":
+                    isTransportingHazardousMaterials = false;
+                    break;
+                default:
+                    throw new ValueOutOfRangeException(@"Is a Yes or No question so please insert:
+Yes
+No");
+
+            }
+
+            return isTransportingHazardousMaterials;
+        }
+        public override List<string> GetsSpecs()
+        {
+            List<string> specsList = new List<string>();
+
+            specsList.Add("Vehicle Model");
+            specsList.Add("Wheels Manufacturer");
+            specsList.Add("Wheels Current Tire Pressure");
+            specsList.Add("Gas Gauge");
+            specsList.Add("Is Transporting Hazardous Materials?");
+            specsList.Add("Payload Capacity");
+            return specsList;
+        }
         public override string ToString()
         {
             string vehicleDescription = base.ToString();

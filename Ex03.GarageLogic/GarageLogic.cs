@@ -52,6 +52,28 @@
             return recordToReturn;
         }
 
+        public List<Record> GetListAccordingToStatus(Record.eVehicleStatus i_Status,ref string io_Meesage)
+        {
+            List<Record> listToReturn = new List<Record>();
+            foreach (Record record in m_Records)
+            {
+                if (record.VehicleStatus == i_Status)
+                {
+                    listToReturn.Add(record);
+                }
+            }
+
+            if (listToReturn.Count == 0)
+            {
+                io_Meesage = "There is no vehicle in this status.";
+            }
+            else
+            {
+                io_Meesage = string.Format("The vehicle that their status is {0} are:", i_Status.ToString());
+            }
+            return listToReturn;
+        }
+
         public List<Record> Records
         {
             get
