@@ -59,7 +59,7 @@
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
-                throw;
+
             }
 
             Console.Clear();
@@ -103,6 +103,12 @@
                 getSpecAndCheckIt(i_Spec, i_VehicleToAdd);
             }
             catch (ValueOutOfRangeException exception)
+            {
+                Console.Clear();
+                Console.WriteLine(exception.Message);
+                getSpecAndCheckIt(i_Spec, i_VehicleToAdd);
+            }
+            catch (FormatException exception)
             {
                 Console.Clear();
                 Console.WriteLine(exception.Message);

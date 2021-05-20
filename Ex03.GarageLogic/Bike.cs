@@ -67,29 +67,29 @@
             switch (i_Property)
             {
                 case "Vehicle Model":
-                    ModelName = (string)i_Value;
+                    ModelName = i_Value;
                     break;
                 case "License Type":
-                    LicenseType = CheckLicenseType((string)i_Value);
+                    LicenseType = checkLicenseType(i_Value);
                     break;
                 case "Wheels Manufacturer":
-                    Wheel.SetWheelsManufacturer(Wheels, WheelCount, (string)i_Value);
+                    Wheel.SetWheelsManufacturer(Wheels, WheelCount, i_Value);
                     break;
                 case "Wheels Current Tire Pressure":
-                    float currentTirePressure = ParsingHelper.ParseToIntAndThrowProvidedMessage((string)i_Value, "Wheels Current Tire Pressure must be a number");
+                    float currentTirePressure = ParsingHelper.ParseToFloatAndThrowProvidedMessage(i_Value, "Wheels Current Tire Pressure must be a number");
                     Wheel.SetWheelsCurrentTirePressure(Wheels, WheelCount, currentTirePressure);
                     break;
                 case "Engine Volume":
-                    int engineVolume = ParsingHelper.ParseToIntAndThrowProvidedMessage((string)i_Value, "Engine volume must be a number.");
+                    int engineVolume = ParsingHelper.ParseToIntAndThrowProvidedMessage(i_Value, "Engine volume must be a number.");
                     EngineVolume = engineVolume;
                     break;
                 case "Gas Gauge":
-                    float gasGauge = ParsingHelper.ParseToFloatAndThrowProvidedMessage((string)i_Value, "Gas gauge must be a number.");
+                    float gasGauge = ParsingHelper.ParseToFloatAndThrowProvidedMessage(i_Value, "Gas gauge must be a number.");
                     GasEngine GasEngine = Engine as GasEngine;
                     GasEngine.GasGague = gasGauge;
                     break;
                 case "Battery Charge":
-                    float batteryCharge = ParsingHelper.ParseToFloatAndThrowProvidedMessage((string)i_Value, "Battery charge must be a number.");
+                    float batteryCharge = ParsingHelper.ParseToFloatAndThrowProvidedMessage(i_Value, "Battery charge must be a number.");
                     ElectricEngine electricEngine = Engine as ElectricEngine;
                     electricEngine.BatteryCharge = batteryCharge;
                     break;
@@ -127,7 +127,7 @@
             return specsList;
         }
 
-        private Bike.eLicenseType CheckLicenseType(string i_LicenseType)
+        private Bike.eLicenseType checkLicenseType(string i_LicenseType)
         {
             Bike.eLicenseType licenseType;
             switch (i_LicenseType)

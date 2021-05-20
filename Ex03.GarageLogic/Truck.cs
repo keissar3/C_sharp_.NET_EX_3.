@@ -18,29 +18,29 @@ namespace Ex03.GarageLogic
             WheelCount = 16;
             Wheels = Wheel.CreateWheelsArray(26, WheelCount);
         }
+
         public override void SetProperties(string i_Property, string i_Value)
         {
             switch (i_Property)
             {
                 case "Vehicle Model":
-                    ModelName = (string)i_Value; //TODO מותר לי לעשות ככה? הרי אני יודעת בוודאות שזה סטרינג
+                    ModelName = i_Value; 
                     break;
                 case "Wheels Manufacturer":
-                    Wheel.SetWheelsManufacturer(Wheels, WheelCount, (string)i_Value);
+                    Wheel.SetWheelsManufacturer(Wheels, WheelCount, i_Value);
                     break;
                 case "Wheels Current Tire Pressure":
-                    float currentTirePressure =
-                        ParsingHelper.ParseToFloatAndThrowProvidedMessage((string)i_Value, "Wheels Current Tire Pressure must be a number");
+                    float currentTirePressure = ParsingHelper.ParseToFloatAndThrowProvidedMessage(i_Value, "Wheels Current Tire Pressure must be a number");
                     Wheel.SetWheelsCurrentTirePressure(Wheels, WheelCount, currentTirePressure);
                     break;
                 case "Is Transporting Hazardous Materials?":
-                    m_IsTransportingHazardousMaterials = checkIsTransportingHazardousMaterials((string)i_Value);
+                    m_IsTransportingHazardousMaterials = checkIsTransportingHazardousMaterials(i_Value);
                     break;
                 case "Payload Capacity":
-                    m_PayloadCapacity = ParsingHelper.ParseToFloatAndThrowProvidedMessage((string)i_Value, "The payload capacity must be a number.");
+                    m_PayloadCapacity = ParsingHelper.ParseToFloatAndThrowProvidedMessage(i_Value, "The payload capacity must be a number.");
                     break;
                 case "Gas Gauge":
-                    float gasGauge = ParsingHelper.ParseToFloatAndThrowProvidedMessage((string)i_Value, "Gas gauge must be a number.");
+                    float gasGauge = ParsingHelper.ParseToFloatAndThrowProvidedMessage(i_Value, "Gas gauge must be a number.");
                     GasEngine GasEngine = Engine as GasEngine;
                     GasEngine.GasGague = gasGauge;
                     break;
@@ -67,6 +67,7 @@ No");
 
             return isTransportingHazardousMaterials;
         }
+
         public override List<string> GetsSpecs()
         {
             List<string> specsList = new List<string>();
@@ -79,6 +80,7 @@ No");
             specsList.Add("Payload Capacity");
             return specsList;
         }
+
         public override string ToString()
         {
             string vehicleDescription = base.ToString();
