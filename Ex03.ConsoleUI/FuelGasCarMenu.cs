@@ -6,7 +6,6 @@
 
     internal class FuelGasCarMenu
     {
-
         internal static void ShowFuelGasVehicleMenu(GarageLogic i_MyGarage)
         {
             Console.Clear();
@@ -41,9 +40,9 @@
         private static void printGasTypeSelectionOptions()
         {
             int i = 1;
-            foreach (var VARIABLE in Enum.GetValues((typeof(eGasType))))
+            foreach (var value in Enum.GetValues(typeof(eGasType)))
             {
-                Console.WriteLine("{0}.{1}", i, VARIABLE.ToString());
+                Console.WriteLine("{0}.{1}", i, value.ToString());
                 i++;
             }
         }
@@ -77,8 +76,8 @@
                     Console.WriteLine("Please try again! ");
                 }
             }
-            validSelection = false;
 
+            validSelection = false;
             float fuelUserSelection = -1;
             Console.Clear();
             while (validSelection == false)
@@ -101,6 +100,7 @@
                     Console.WriteLine("Please try again! ");
                 }
             }
+
             Console.Clear();
             return fuelUserSelection;
         }

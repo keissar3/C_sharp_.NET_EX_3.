@@ -3,6 +3,7 @@
     using System;
     using System.Threading;
     using GarageLogic;
+
     internal class ChargeElectricCarMenu
     {
         internal static void ShowChargeElectricVehicleMenu(GarageLogic i_MyGarage)
@@ -30,14 +31,16 @@
                 }
 
             }
+
             else
             {
                 Console.Clear();
                 Console.WriteLine("This vehicle is not found in our garage ");
             }
+
             Thread.Sleep(2000);
         }
-        
+
         private static float getValidMinutesToCharge(ElectricEngine i_UserEngine)
         {
             Console.Clear();
@@ -52,7 +55,7 @@
                 validSelection = float.TryParse(stringUserSelection, out userSelection);
                 if (validSelection == true)
                 {
-                    if (userSelection / 60 + i_UserEngine.BatteryCharge > i_UserEngine.BatteryCapacity)
+                    if (((userSelection / 60) + i_UserEngine.BatteryCharge) > i_UserEngine.BatteryCapacity)
                     {
                         validSelection = false;
                         Console.WriteLine("Too many minutes to charge! ");
@@ -66,6 +69,7 @@
                     Console.WriteLine("Please try again! ");
                 }
             }
+
             return userSelection / 60;
         }
     }

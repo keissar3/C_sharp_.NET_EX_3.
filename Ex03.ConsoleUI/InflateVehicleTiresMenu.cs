@@ -1,12 +1,11 @@
 ﻿namespace Ex03.ConsoleUI
 {
-    using GarageLogic;
     using System;
     using System.Threading;
+    using GarageLogic;
 
     internal class InflateVehicleTiresMenu
     {
-
         internal static void ShowInflateVehicleTiresMenu(GarageLogic i_MyGarage)
         {
             Console.Clear();

@@ -2,6 +2,7 @@
 {
     using System;
     using GarageLogic;
+
     internal class ShowVehicleDetailsMenu
     {
         internal static void ShowShowVehicleDetailsMenu(GarageLogic i_MyGarage)
@@ -14,7 +15,6 @@
             {
                 Record vehicleRecord = i_MyGarage.GetRecordByLicensePlate(licensePlateNumber);
                 Console.WriteLine(vehicleRecord.ToString());
-
             }
             else
             {

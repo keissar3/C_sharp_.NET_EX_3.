@@ -1,12 +1,17 @@
-﻿using System;
-using System.Text;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+    using System.Text;
+
     public class ElectricEngine : Engine
     {
         private float m_BatteryCharge;
         private float m_BatteryCapacity;
+
+        public ElectricEngine(float i_BatteryCapacity)
+        {
+            m_BatteryCapacity = i_BatteryCapacity;
+        }
 
         public float BatteryCharge
         {
@@ -14,9 +19,10 @@ namespace Ex03.GarageLogic
             {
                 return m_BatteryCharge;
             }
+
             set
             {
-                if (value < m_BatteryCapacity)
+                if (value <= m_BatteryCapacity)
                 {
                     m_BatteryCharge = value;
                 }
@@ -34,15 +40,11 @@ namespace Ex03.GarageLogic
             {
                 return m_BatteryCapacity;
             }
+
             set
             {
                 m_BatteryCapacity = value;
             }
-        }
-        
-        public ElectricEngine( float i_BatteryCapacity)
-        {
-            m_BatteryCapacity = i_BatteryCapacity;
         }
 
         public void ChargeBattery(float i_HoursToCharge)
@@ -51,6 +53,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ValueOutOfRangeException("Too much power, can't charge so much!");
             }
+
             m_BatteryCharge += i_HoursToCharge;
         }
 

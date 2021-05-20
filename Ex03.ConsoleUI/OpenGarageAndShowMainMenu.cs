@@ -38,31 +38,37 @@
                         InsertVehicleToGarageMenu.ShowInsertVehicleToGarageMenu(i_MyGarage);
                         break;
                     }
+
                 case (int)eMainGarageMenu.ShowVehicles:
                     {
                         GetListOfVehiclePlateNumberMenu.ShowGetListOfVehiclePlateNumberMenu(i_MyGarage);
                         break;
                     }
+
                 case (int)eMainGarageMenu.ChangeVehiclesStatus:
                     {
                         ChangeVehicleStatusInGarageMenu.ShowChangeVehiclesStatusMenu(i_MyGarage);
                         break;
                     }
+
                 case (int)eMainGarageMenu.InflateVehicleTires:
                     {
                         InflateVehicleTiresMenu.ShowInflateVehicleTiresMenu(i_MyGarage);
                         break;
                     }
+
                 case (int)eMainGarageMenu.FuelGasVehicle:
                     {
                         FuelGasCarMenu.ShowFuelGasVehicleMenu(i_MyGarage);
                         break;
                     }
+
                 case (int)eMainGarageMenu.ChargeElectricVehicle:
                     {
                         ChargeElectricCarMenu.ShowChargeElectricVehicleMenu(i_MyGarage);
                         break;
                     }
+
                 case (int)eMainGarageMenu.ShowVehicleDetails:
                     {
                         ShowVehicleDetailsMenu.ShowShowVehicleDetailsMenu(i_MyGarage);
@@ -107,4 +113,3 @@
         }
     }
 }
-

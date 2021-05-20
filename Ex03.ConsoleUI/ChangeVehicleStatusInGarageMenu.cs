@@ -2,14 +2,16 @@
 {
     using System;
     using GarageLogic;
+
     internal class ChangeVehicleStatusInGarageMenu
     {
-        enum eSetStatusMenu
+        internal enum eSetStatusMenu
         {
             inRepair = 1,
             isFixed,
             isPaidUp
         }
+
         public static void ShowChangeVehiclesStatusMenu(GarageLogic i_MyGarage)
         {
             Console.WriteLine("Please insert the plate number of the vehicle");
@@ -23,6 +25,7 @@
                 getUserInputStatusAndChangeIt(i_MyGarage, ownerPlateNumber);
             }
         }
+
         private static void getUserInputStatusAndChangeIt(GarageLogic i_MyGarage, string i_OwnerPlateNumber)
         {
             int userSelection = 1;
@@ -53,7 +56,6 @@
             }
 
             setVehicleStatusInTheGarage(i_MyGarage, i_OwnerPlateNumber, userSelection);
-
         }
 
         private static void setVehicleStatusInTheGarage(GarageLogic i_MyGarage, string i_OwnerPlateNumber,
@@ -66,11 +68,13 @@
                         i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber, Record.eVehicleStatus.inRepair);
                         break;
                     }
+
                 case (int)eSetStatusMenu.isFixed:
                     {
                         i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber, Record.eVehicleStatus.isFixed);
                         break;
                     }
+
                 case (int)eSetStatusMenu.isPaidUp:
                     {
                         i_MyGarage.SetStatusInVehicle(i_OwnerPlateNumber, Record.eVehicleStatus.isPaidUp);

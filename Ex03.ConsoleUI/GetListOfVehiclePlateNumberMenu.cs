@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using GarageLogic;
 
-    enum eGetVehiclesListMenu
+    internal enum eGetVehiclesListMenu
     {
         AllVehicles = 1,
-        RepairedVehicles,
+        IsBeingRepairedVehicles,
         FixedVehicles,
-        PaidVehicles
+        PaidForVehicles
     }
 
     internal class GetListOfVehiclePlateNumberMenu
@@ -18,38 +18,41 @@
         {
             Console.Clear();
             int userSelection = getUserSelection();
-            string messege=null;
+            string message = null;
             switch (userSelection)
             {
-                case (int) eGetVehiclesListMenu.AllVehicles:
-                {
-                    presentVehiclesPlateNumberList(i_MyGarage.Records);
-                    break;
-                }
-                case (int) eGetVehiclesListMenu.FixedVehicles:
-                {
-                    List<Record> fixedVehicleList =
-                        i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.isFixed, ref messege);
-                    Console.WriteLine(messege);
-                    presentVehiclesPlateNumberList(fixedVehicleList);
-                    break;
-                }
-                case (int) eGetVehiclesListMenu.PaidVehicles:
-                {
-                    List<Record> paidVehicleList =
-                        i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.isPaidUp, ref messege);
-                    Console.WriteLine(messege);
-                    presentVehiclesPlateNumberList(paidVehicleList);
-                    break;
-                }
-                case (int) eGetVehiclesListMenu.RepairedVehicles:
-                {
-                    List<Record> repairedVehicleList =
-                        i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.inRepair, ref messege);
-                    Console.WriteLine(messege);
-                    presentVehiclesPlateNumberList(repairedVehicleList) ;
-                    break;
-                }
+                case (int)eGetVehiclesListMenu.AllVehicles:
+                    {
+                        presentVehiclesPlateNumberList(i_MyGarage.Records);
+                        break;
+                    }
+
+                case (int)eGetVehiclesListMenu.FixedVehicles:
+                    {
+                        List<Record> fixedVehicleList =
+                            i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.isFixed, ref message);
+                        Console.WriteLine(message);
+                        presentVehiclesPlateNumberList(fixedVehicleList);
+                        break;
+                    }
+
+                case (int)eGetVehiclesListMenu.PaidForVehicles:
+                    {
+                        List<Record> paidVehicleList =
+                            i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.isPaidUp, ref message);
+                        Console.WriteLine(message);
+                        presentVehiclesPlateNumberList(paidVehicleList);
+                        break;
+                    }
+
+                case (int)eGetVehiclesListMenu.IsBeingRepairedVehicles:
+                    {
+                        List<Record> repairedVehicleList =
+                            i_MyGarage.GetListAccordingToStatus(Record.eVehicleStatus.inRepair, ref message);
+                        Console.WriteLine(message);
+                        presentVehiclesPlateNumberList(repairedVehicleList);
+                        break;
+                    }
             }
         }
 
@@ -62,9 +65,9 @@
                 Console.WriteLine(
                     @"Which vehicle would you like to get?
 1. All Vehicles
-2. Repaired vehicles
+2. Being repaired vehicles
 3. Fixed vehicles 
-4. Paid vehicles");
+4. Paid for vehicles");
                 string stringUserSelection = Console.ReadLine();
                 validSelection = int.TryParse(stringUserSelection, out userSelection);
                 if (validSelection == true)

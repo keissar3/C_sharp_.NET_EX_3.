@@ -5,5 +5,5 @@
         Octan98 = 1,
         Octan95,
         Soler
-    };
+    }
 }

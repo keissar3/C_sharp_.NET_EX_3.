@@ -1,9 +1,18 @@
 ﻿namespace Ex03.GarageLogic
 {
     using System.Collections.Generic;
+
     public class GarageLogic
     {
         private List<Record> m_Records = new List<Record>();
+
+        public List<Record> Records
+        {
+            get
+            {
+                return m_Records;
+            }
+        }
 
         public void AddVehicleToGarageRecords(Record i_Record)
         {
@@ -52,7 +61,7 @@
             return recordToReturn;
         }
 
-        public List<Record> GetListAccordingToStatus(Record.eVehicleStatus i_Status,ref string io_Meesage)
+        public List<Record> GetListAccordingToStatus(Record.eVehicleStatus i_Status, ref string io_Meesage)
         {
             List<Record> listToReturn = new List<Record>();
             foreach (Record record in m_Records)
@@ -71,15 +80,8 @@
             {
                 io_Meesage = string.Format("The vehicle that their status is {0} are:", i_Status.ToString());
             }
-            return listToReturn;
-        }
 
-        public List<Record> Records
-        {
-            get
-            {
-                return m_Records;
-            }
+            return listToReturn;
         }
 
         public void SetStatusInVehicle(string i_LicensePlateNumber, Record.eVehicleStatus i_Status)

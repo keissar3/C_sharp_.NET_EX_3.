@@ -1,9 +1,9 @@
 ﻿namespace Ex03.ConsoleUI
 {
-    using System;
-    using System.Threading;
-    using System.Collections.Generic;
     using GarageLogic;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
 
     internal class InsertVehicleToGarageMenu
     {
@@ -32,10 +32,8 @@
             Thread.Sleep(3000);
         }
 
-        private static void insertNewVehicleToGarage(string i_LicensePlate, GarageLogic i_MyGarage, string i_OwnerName,
-            string i_OwnerPhoneNumber)
+        private static void insertNewVehicleToGarage(string i_LicensePlate, GarageLogic i_MyGarage, string i_OwnerName, string i_OwnerPhoneNumber)
         {
-
             string vehicleTypeToInsert = getFromUserTypeOfVehicle();
 
             try
@@ -57,7 +55,6 @@
                 Console.Clear();
                 Console.WriteLine(exception.Message);
                 insertNewVehicleToGarage(i_LicensePlate, i_MyGarage, i_OwnerName, i_OwnerPhoneNumber);
-
             }
             catch (Exception exception)
             {
@@ -66,7 +63,6 @@
             }
 
             Console.Clear();
-            ;
         }
 
         private static string getFromUserTypeOfVehicle()
@@ -81,17 +77,15 @@
             Console.WriteLine("Which vehicle would you like to insert ?");
             string vehicleTypeToInsert = Console.ReadLine();
 
-
             return vehicleTypeToInsert;
         }
 
-        private static void getInformationFromUserAboutTheVehicle(List<string> i_vehicleSpecsNedded,
-            Vehicle i_VehicleToAdd)
+        private static void getInformationFromUserAboutTheVehicle(List<string> i_VehicleSpecsNeeded, Vehicle i_VehicleToAdd)
         {
             Console.Clear();
-            foreach (string specNeeded in i_vehicleSpecsNedded)
+            foreach (string specNeeded in i_VehicleSpecsNeeded)
             {
-              getSpecAndCheckIt(specNeeded,i_VehicleToAdd);
+                getSpecAndCheckIt(specNeeded, i_VehicleToAdd);
             }
         }
 

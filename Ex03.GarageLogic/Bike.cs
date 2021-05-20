@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     using System;
+    using System.Collections.Generic;
     using System.Text;
-    class Bike : Vehicle 
-    { 
-       internal enum eLicenseType
+
+    public class Bike : Vehicle
+    {
+        internal enum eLicenseType
         {
             A = 1,
             B1,
@@ -17,15 +17,15 @@ namespace Ex03.GarageLogic
         private eLicenseType m_LicenseType;
         private int m_EngineVolume;
 
-        public Bike( eTypeOfEngine i_TypeOfEngine, string i_LicensePlateNumber)
+        public Bike(eTypeOfEngine i_TypeOfEngine, string i_LicensePlateNumber)
         {
-            Engine engine=null;
+            Engine engine = null;
             switch (i_TypeOfEngine)
             {
                 case eTypeOfEngine.Gas:
                     engine = new GasEngine(eGasType.Octan98, 6);
                     break;
-                case eTypeOfEngine.Electric: 
+                case eTypeOfEngine.Electric:
                     engine = new ElectricEngine(1.8f);
                     break;
             }
@@ -36,91 +36,64 @@ namespace Ex03.GarageLogic
             Wheels = Wheel.CreateWheelsArray(30, WheelCount);
         }
 
-
-
         public int EngineVolume
         {
             get
             {
                 return m_EngineVolume;
             }
+
             set
             {
                 m_EngineVolume = value;
             }
         }
 
-        public eLicenseType LicenseType
+        internal eLicenseType LicenseType
         {
             get
             {
                 return m_LicenseType;
             }
+
             set
             {
-
                 m_LicenseType = value;
             }
         }
 
-        public override void SetProperties(string i_Property, object i_Value)
+        public override void SetProperties(string i_Property, string i_Value)
         {
             switch (i_Property)
             {
                 case "Vehicle Model":
-                    ModelName = (string)i_Value; //TODO מותר לי לעשות ככה? הרי אני יודעת בוודאות שזה סטרינג
+                    ModelName = (string)i_Value;
                     break;
                 case "License Type":
-                    LicenseType = CheckLicenseType((string) i_Value);
+                    LicenseType = CheckLicenseType((string)i_Value);
                     break;
                 case "Wheels Manufacturer":
-                    Wheel.SetWheelsManufacturer(Wheels,WheelCount,(string)i_Value);
+                    Wheel.SetWheelsManufacturer(Wheels, WheelCount, (string)i_Value);
                     break;
                 case "Wheels Current Tire Pressure":
-                    float currentTirePressure = TryToParse.Int((string)i_Value, "Wheels Current Tire Pressure must be a number");
-                   Wheel.SetWheelsCurrentTirePressure(Wheels,WheelCount,currentTirePressure);
+                    float currentTirePressure = ParsingHelper.ParseToIntAndThrowProvidedMessage((string)i_Value, "Wheels Current Tire Pressure must be a number");
+                    Wheel.SetWheelsCurrentTirePressure(Wheels, WheelCount, currentTirePressure);
                     break;
                 case "Engine Volume":
-                    int engineVolume = TryToParse.Int((string) i_Value, "Engine volume must be a number.");
+                    int engineVolume = ParsingHelper.ParseToIntAndThrowProvidedMessage((string)i_Value, "Engine volume must be a number.");
                     EngineVolume = engineVolume;
                     break;
                 case "Gas Gauge":
-                    float gasGauge = TryToParse.Float((string)i_Value, "Gas gauge must be a number.");
+                    float gasGauge = ParsingHelper.ParseToFloatAndThrowProvidedMessage((string)i_Value, "Gas gauge must be a number.");
                     GasEngine GasEngine = Engine as GasEngine;
                     GasEngine.GasGague = gasGauge;
                     break;
                 case "Battery Charge":
-                    float batteryCharge = TryToParse.Float((string)i_Value, "Battery charge must be a number.");
-                    ElectricEngine ElctricEngine = Engine as ElectricEngine;
-                    ElctricEngine.BatteryCharge = batteryCharge;
+                    float batteryCharge = ParsingHelper.ParseToFloatAndThrowProvidedMessage((string)i_Value, "Battery charge must be a number.");
+                    ElectricEngine electricEngine = Engine as ElectricEngine;
+                    electricEngine.BatteryCharge = batteryCharge;
                     break;
             }
-        }
-        private Bike.eLicenseType CheckLicenseType(string i_LicenseType)
-        {
-            Bike.eLicenseType licenseType;
-            switch (i_LicenseType)
-            {
-                case "A":
-                    licenseType = Bike.eLicenseType.A;
-                    break;
-                case "B1":
-                    licenseType = Bike.eLicenseType.B1;
-                    break;
-                case "AA":
-                    licenseType = Bike.eLicenseType.AA;
-                    break;
-                case "BB":
-                    licenseType = Bike.eLicenseType.BB;
-                    break;
-                default:
-                    throw new ValueOutOfRangeException(@"The licenses type we support is only: 
-A
-B1
-AA
-BB");
-            }
-            return licenseType;
         }
 
         public override string ToString()
@@ -150,7 +123,36 @@ BB");
             {
                 specsList.Add("Battery Charge");
             }
+
             return specsList;
+        }
+
+        private Bike.eLicenseType CheckLicenseType(string i_LicenseType)
+        {
+            Bike.eLicenseType licenseType;
+            switch (i_LicenseType)
+            {
+                case "A":
+                    licenseType = Bike.eLicenseType.A;
+                    break;
+                case "B1":
+                    licenseType = Bike.eLicenseType.B1;
+                    break;
+                case "AA":
+                    licenseType = Bike.eLicenseType.AA;
+                    break;
+                case "BB":
+                    licenseType = Bike.eLicenseType.BB;
+                    break;
+                default:
+                    throw new ValueOutOfRangeException(@"The licenses type we support is only: 
+A
+B1
+AA
+BB");
+            }
+
+            return licenseType;
         }
     }
 }

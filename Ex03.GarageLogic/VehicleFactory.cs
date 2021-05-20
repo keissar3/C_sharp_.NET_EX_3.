@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+    using System.Collections.Generic;
+
     public class VehicleFactory
     {
-        
-
         private static readonly List<string> r_VehiclesList = new List<string>()
         {
             "Gas Bike",
@@ -47,8 +45,5 @@ namespace Ex03.GarageLogic
 
             return vehicleToReturn;
         }
-
-
     }
-
 }
