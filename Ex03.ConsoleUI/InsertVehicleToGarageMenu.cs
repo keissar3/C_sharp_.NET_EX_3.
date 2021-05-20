@@ -36,7 +36,7 @@
             string i_OwnerPhoneNumber)
         {
 
-            int vehicleTypeToInsert = getFromUserTypeOfVehicle();
+            string vehicleTypeToInsert = getFromUserTypeOfVehicle();
 
             try
             {
@@ -69,24 +69,18 @@
             ;
         }
 
-        private static int getFromUserTypeOfVehicle()
+        private static string getFromUserTypeOfVehicle()
         {
+            List<string> vehiclesList = VehicleFactory.GetVehiclesList();
             Console.WriteLine("These are the vehicles that we support:");
-            for (int i = 1; i < Enum.GetNames((typeof(VehicleFactory.eVehiclesSupported))).Length+1; i++)
+            foreach (string vehicle in vehiclesList)
             {
-                Console.WriteLine("{0}. {1}",i, Enum.GetName(typeof(VehicleFactory.eVehiclesSupported), i));
-
+                Console.WriteLine(vehicle);
             }
 
             Console.WriteLine("Which vehicle would you like to insert ?");
-            string vehicleTypeToInsertString = Console.ReadLine();
+            string vehicleTypeToInsert = Console.ReadLine();
 
-            if (int.TryParse(vehicleTypeToInsertString, out int vehicleTypeToInsert) == false)
-            {
-                Console.WriteLine("Your selection must be a number.");
-                Console.Clear();
-                getFromUserTypeOfVehicle();
-            }
 
             return vehicleTypeToInsert;
         }

@@ -5,32 +5,40 @@ namespace Ex03.GarageLogic
 {
     public class VehicleFactory
     {
-        public enum eVehiclesSupported
+        
+
+        private static readonly List<string> r_VehiclesList = new List<string>()
         {
-            GasBike=1,
-            ElectricBike,
-            GasCar,
-            ElectricCar,
-            Truck
+            "Gas Bike",
+            "Electric Bike",
+            "Gas Car",
+            "Electric Car",
+            "Gas Truck"
+        };
+
+        public static List<string> GetVehiclesList()
+        {
+            return r_VehiclesList;
         }
-        public static Vehicle CreateVehicle(int i_VehicleToBuild, string i_LicensePlateNumber)
+
+        public static Vehicle CreateVehicle(string i_VehicleToBuild, string i_LicensePlateNumber)
         {
             Vehicle vehicleToReturn;
             switch (i_VehicleToBuild)
             {
-                case (int)eVehiclesSupported.GasBike:
+                case "Gas Bike":
                     vehicleToReturn = new Bike(eTypeOfEngine.Gas, i_LicensePlateNumber);
                     break;
-                case (int)eVehiclesSupported.ElectricBike:
+                case "Electric Bike":
                     vehicleToReturn = new Bike(eTypeOfEngine.Electric, i_LicensePlateNumber);
                     break;
-                case (int)eVehiclesSupported.GasCar:
+                case "Gas Car":
                     vehicleToReturn = new Car(eTypeOfEngine.Gas, i_LicensePlateNumber);
                     break;
-                case (int)eVehiclesSupported.ElectricCar:
+                case "Electric Car":
                     vehicleToReturn = new Car(eTypeOfEngine.Electric, i_LicensePlateNumber);
                     break;
-                case (int)eVehiclesSupported.Truck:
+                case "Gas Truck":
                     vehicleToReturn = new Truck(i_LicensePlateNumber);
                     break;
                 default:
@@ -39,5 +47,8 @@ namespace Ex03.GarageLogic
 
             return vehicleToReturn;
         }
+
+
     }
+
 }
